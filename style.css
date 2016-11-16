@@ -1,0 +1,53 @@
+
+#aboutme    {
+                font-size:  12px;
+            }
+
+#one    {
+            color:  lightgreen;
+        }
+
+.container  {
+                text-align:     center;
+            }
+
+.nav        {
+                text-align:         center;
+                list-style-type:    none;
+                font-size:          20px;
+            }
+
+.space  {
+            display:    inline;
+            margin:     15px;
+        }
+
+img {
+        height:     200px;
+        float:      left;
+    }
+
+.greenblock {
+                background-color:   greenyellow;
+            }
+
+#expheader  {
+                font-family:        Montserrat;
+            }
+
+
+#experience-list    {
+                        list-style-type:   none;
+                    }
+
+.square {
+            list-style-type:    square;
+        }
+
+#left   {
+            text-align: left;
+        }
+
+.orange {
+            color:  orange;
+        }

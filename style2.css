@@ -1,0 +1,239 @@
+
+.card_front {
+    height:             100px;
+    width:              50px;
+    background-color:   lightgray;
+    border:             2px solid magenta;
+    text-align:         center;
+    border-radius:      10px;
+}
+
+.card_back {
+    height:             100px;
+    width:              50px;
+    background-color:   yellow;
+    border:             2px solid magenta;
+    text-align:         center;
+}
+
+body {
+    background-color:   lightyellow;
+    font-family:        Verdana;
+}
+
+/* Header and its elements */
+header {
+    height:             5em;
+    width:              90vw;
+
+    background-color:   lightgray;
+    border:             0.1em solid magenta;
+    text-align:         center;
+    border-radius:      0.5em;
+    margin:             auto;
+}
+
+.logo1 {
+    height:             80%;
+    width:              14%;
+
+    background-color:   darkgray;
+    border:             0.1em solid deeppink;
+    text-align:         center;
+    display:            inline-block;
+    border-radius:      0.5em;
+    float:              left;
+    margin:             0.5em 0 0 0.5em;
+}
+
+.title {
+    border:             0.1em solid magenta;
+    height:             4em;
+    width:              50%;
+    display:            inline-block;
+    margin-top:         0.5em;
+}
+
+.settings {
+    border:             0.1em solid magenta;
+    height:             4em;
+    width:              24%;
+    display:            inline-block
+}
+
+.about {
+    border:             0.1em solid magenta;
+    height:             4em;
+    width:              10%;
+    display:            inline-block;
+    float:              right;
+    margin-top:         0.5em;
+}
+
+/* Bottom container and its elements */
+.bottom_container {
+    height:             80vh;
+    width:              90vw;
+    background-color:   lightgray;
+    border:             0.1em solid magenta;
+    text-align:         center;
+    border-radius:      0.5em;
+    margin:             auto;
+}
+
+/* left side bar within bottom container and its elements */
+.left_side {
+    height:             70vh;
+    width:              19%;
+    background-color:   lightgray;
+    border:             0.1em solid magenta;
+    text-align:         center;
+    border-radius:      0.5em;
+    display:            inline-block;
+    vertical-align:     top;
+}
+
+    .first_top {
+        height:             5em;
+        width:              90%;
+        border:             0.1em solid magenta;
+        margin:             0.2em 0 0 0.2em;
+    }
+
+    .label {
+
+    }
+
+    .games-played {
+
+    }
+
+    .attempts {
+
+    }
+
+    .accuracy {
+
+    }
+
+    .reset {
+
+    }
+    .second_top {
+        border:             0.1em solid magenta;
+    }
+
+    .third_top {
+        border:             0.1em solid magenta;
+    }
+
+    .fourth_top {
+        border:             0.1em solid magenta;
+    }
+
+/* game area and its elements within bottom container */
+#game_area {
+    height:             80vh;
+    width:              80%;
+
+    background-color:   lightgray;
+    border:             0.1em solid magenta;
+    text-align:         center;
+    border-radius:      0.5em;
+    margin:             auto;
+    display:            inline-block;
+}
+
+    .card_row {
+        border:             0.1em dotted black;
+        height:             30%;
+        margin:             0.2em;
+    }
+
+    .card {
+        border:             0.1em dashed brown;
+        height:             99%;
+        position:           absolute;
+    }
+
+    .front {
+
+    }
+
+    .back {
+        position:           relative;
+        bottom:             4em;
+        padding-right:      0px;
+        opacity:            0.7;
+    }
+
+/*
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    text-align: center;
+}
+
+div {
+    border: 3px solid black;
+    border-radius: 8px;
+    display: inline-block;
+    font-size: 35px;
+    height: 250px;
+    margin: 15px;
+    padding-top: 90px;
+    width: 250px;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.green {
+    background-color: green;
+}
+
+.red {
+    background-color: red;
+}
+
+.pink {
+    background-color: pink;
+}
+
+.card-back,
+.flag,
+.path {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+
+.card-back {
+    background-image: url("images/card_design.png");
+}
+
+.flag {
+    background-image: url("images/british_flag.jpg");
+}
+
+.path {
+    background-image: url("images/optional_path.jpg");
+}
+
+.no-select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+*/
