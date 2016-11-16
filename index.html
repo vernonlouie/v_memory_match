@@ -1,0 +1,257 @@
+<!--    Memory Match project    Vernon Louie    C11.16      November xx, 2016   -->
+
+<!doctype html>
+<html>
+
+    <head>
+        <title> memory match </title>
+        <link rel="stylesheet" href="style2.css">
+
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"</script>
+        <script src="http://learning-fuze.github.io/memory_match/v0.1/script.js"</script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <!-- Enter the Bootstrap CDN address into the link below -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+
+        <script>
+            $(document).ready(function(){
+                $("#card1").click(function(){
+                    console.log()
+                    $('.card_front').toggleClass("card_back");
+                });
+            });
+        </script>
+    </head>
+
+    <body>
+        <header>
+            <div class = "logo1">
+                <img src = "images/icon1.png" alt="abstract symbol" width="70" />
+            </div>
+
+            <div class = "title"> My Little Pony Card Match </div>
+
+            <div class = "settings">
+                <a href="https://sfgate.com/giants" target="_blank"> Settings </a>
+            </div>
+
+            <div class = "about">
+                <a href="index1.html" target="_blank"> About </a>
+            </div>
+        </header>
+
+        <div class = "bottom_container">
+            <div class = "left_side"> Stats
+                <div class = "first_top games-played">
+                    <h4 class = "label">
+                        Games Played:
+                    </h4>
+                    <p class = "value">
+                        88
+                    </p>
+                </div>
+
+                <div class = "first_top attempts">
+                    <h4 class = "label">
+                        Attempts:
+                    </h4>
+                    <p class = "value">
+                        19
+                    </p>
+                </div>
+
+                <div class = "first_top">
+                    <h4 class = "label">
+                        Accuracy:
+                    </h4>
+                    <p class = "value">
+                        21%
+                    </p>
+                </div>
+
+                <div class = "first_top">
+                    <button type="button" class="btn btn-default reset" data-dismiss="modal">Reset Game </button>
+                </div>
+            </div>
+
+            <div id = "game_area">
+
+                <div class="card_row">
+                    <div class="col-xs-2 card">
+                        <div class = "front">
+                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                        </div>
+
+                        <div class = "back">
+                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                        </div>
+                    </div>
+                    <div class="col-xs-2 card">
+                        <div class = "front">
+                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                        </div>
+
+                        <div class = "back">
+                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                        </div>
+                    </div>
+                    <div class="col-xs-2 card">
+                        <div class = "front">
+                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                        </div>
+
+                        <div class = "back">
+                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                        </div>
+                    </div>
+                    <div class="col-xs-2 card">
+                        <div class = "front">
+                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                        </div>
+
+                        <div class = "back">
+                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                        </div>
+                    </div>
+                    <div class="col-xs-2 card">
+                        <div class = "front">
+                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                        </div>
+
+                        <div class = "back">
+                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                        </div>
+                    </div>
+                    <div class="col-xs-2 card">
+                        <div class = "front">
+                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                        </div>
+
+                        <div class = "back">
+                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card_row">
+                    <div class="col-xs-2 card">
+                        <div class = "front">
+                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                        </div>
+
+                        <div class = "back">
+                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                        </div>
+                    </div>
+                    <div class="col-xs-2 card">
+                        <div class = "front">
+                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                        </div>
+
+                        <div class = "back">
+                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                        </div>
+                    </div>
+                    <div class="col-xs-2 card">
+                        <div class = "front">
+                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                        </div>
+
+                        <div class = "back">
+                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                        </div>
+                    </div>
+                    <div class="col-xs-2 card">
+                        <div class = "front">
+                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                        </div>
+
+                        <div class = "back">
+                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                        </div>
+                    </div>
+                    <div class="col-xs-2 card">
+                        <div class = "front">
+                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                        </div>
+
+                        <div class = "back">
+                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                        </div>
+                    </div>
+                    <div class="col-xs-2 card">
+                        <div class = "front">
+                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                        </div>
+
+                        <div class = "back">
+                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card_row">
+                    <div class="col-xs-2 card">
+                        <div class = "front">
+                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                        </div>
+
+                        <div class = "back">
+                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                        </div>
+                    </div>
+                    <div class="col-xs-2 card">
+                        <div class = "front">
+                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                        </div>
+
+                        <div class = "back">
+                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                        </div>
+                    </div>
+                    <div class="col-xs-2 card">
+                        <div class = "front">
+                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                        </div>
+
+                        <div class = "back">
+                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                        </div>
+                    </div>
+                    <div class="col-xs-2 card">
+                        <div class = "front">
+                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                        </div>
+
+                        <div class = "back">
+                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                        </div>
+                    </div>
+                    <div class="col-xs-2 card">
+                        <div class = "front">
+                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                        </div>
+
+                        <div class = "back">
+                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                        </div>
+                    </div>
+                    <div class="col-xs-2 card">
+                        <div class = "front">
+                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                        </div>
+
+                        <div class = "back">
+                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class = "card_front"> card 1 front </div> -->
+        <!-- <div class = "card"> card back </div>  -->
+
+    </body>
+
+</html>
