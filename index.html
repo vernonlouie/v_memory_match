@@ -32,39 +32,63 @@
                 $(".back").click(card_clicked);
             });
 
-            function card_clicked() {
-                console.log("I'm in the card_clicked function");
-                $(this).toggleClass("make_opaque");
+            function resetTwoCards () {
+                $(first_card_clicked).toggleClass("make_opaque");
+                $(second_card_clicked).toggleClass("make_opaque");
+                first_card_clicked = null;
+                second_card_clicked = null;
             }
 
-            if (first_card_clicked === null) {1a
-                first_card_clicked = this;
-            }1a
-            else {1b
-                second_card_clicked = this;
+            function card_clicked() {
+                // console.log("I'm in the card_clicked function");
+                console.log("1st_card_clicked: ", first_card_clicked);
+                console.log("2nd_card_clicked: ", second_card_clicked);
+                console.log("this: ",this);
 
-                if (first_card_clicked === second_card_clicked) {2a
-                    match_counter++;
-                    first_card_clicked = null;
-                    second_card_clicked = null;
+                $(this).toggleClass("make_opaque");
 
-                    if (match_counter === total_possible_matches) {3a
-                        console.log("You have won!  Word to the mother!");
-                    }3a
-                    else {3b
+                if (first_card_clicked === null) {
+                    first_card_clicked = this;
+
+                    console.log("branch 1");
+                }
+                else {
+                    second_card_clicked = this;
+                    console.log("2nd_card_clicked: ",second_card_clicked);
+
+                    // var parent_1st_img = $("first_card_clicked").parent();
+                    var first_img = $("first_card_clicked.parent .front :image");
+
+                    // var parent_2nd_img = $("second_card_clicked").parent();
+                    var second_img = $("second_card_clicked.parent .front :image");
+
+                    if (first_img === second_img) {
+                        match_counter++;
+                        first_card_clicked = null;
+                        second_card_clicked = null;
+                        console.log("1st = 2nd and match counter is: ", match_counter);
+
+                        if (match_counter === total_possible_matches) {
+                            $('#game_area').append("<b>You have won!  Word to the mother!</b>");
+                        }
+                        else {
+                            console.log("return #1");
+                            return;
+                        } // end of 3rd if block
+
+                    }
+                    else {
+                        console.log("1st != 2nd, return #2");
+                        setTimeout(resetTwoCards, 2000);
                         return;
-                    }3b // end of 3rd if block
+                    } // end of 2nd if block
 
-                }2a
-                else {2b
-                    $(first_card_clicked).toggleClass("make_opaque");
-                    $(second_card_clicked).toggleClass("make_opaque");
-                    first_card_clicked = null;
-                    second_card_clicked = null;
-                    return;
-                }2b // end of 2nd if block
+                } // end of 1st if block
 
-            }1b // end of 1st if block
+            } // end of function card_clicked
+
+
+
 
         </script>
     </head>
