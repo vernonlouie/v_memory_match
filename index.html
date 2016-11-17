@@ -13,7 +13,6 @@
         <!-- Enter the Bootstrap CDN address into the link below -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 
-
         <script>
 //          $(document).ready(function(){
 //                $(".card > .back").click(function(){
@@ -40,29 +39,24 @@
             }
 
             function card_clicked() {
-                // console.log("I'm in the card_clicked function");
-                console.log("1st_card_clicked: ", first_card_clicked);
-                console.log("2nd_card_clicked: ", second_card_clicked);
-                console.log("this: ",this);
+//                console.log("1st_card_clicked: ", first_card_clicked);
+//                console.log("2nd_card_clicked: ", second_card_clicked);
+//                console.log("this: ",this);
 
                 $(this).toggleClass("make_opaque");
 
                 if (first_card_clicked === null) {
                     first_card_clicked = this;
-
-                    console.log("branch 1");
                 }
                 else {
                     second_card_clicked = this;
-                    console.log("2nd_card_clicked: ",second_card_clicked);
 
-                    // var parent_1st_img = $("first_card_clicked").parent();
-                    var first_img = $("first_card_clicked.parent .front :image");
+                    var first_img = $(first_card_clicked).parent().children(".front").find("img").attr('src');
+                    var second_img = $(second_card_clicked).parent().children(".front").find("img").attr('src');
+                    console.log("first_img: ", first_img);
+                    console.log("second_img: ", second_img);
 
-                    // var parent_2nd_img = $("second_card_clicked").parent();
-                    var second_img = $("second_card_clicked.parent .front :image");
-
-                    if (first_img === second_img) {
+                    if (first_img == second_img) {
                         match_counter++;
                         first_card_clicked = null;
                         second_card_clicked = null;
@@ -72,24 +66,17 @@
                             $('#game_area').append("<b>You have won!  Word to the mother!</b>");
                         }
                         else {
-                            console.log("return #1");
                             return;
                         } // end of 3rd if block
-
                     }
                     else {
-                        console.log("1st != 2nd, return #2");
-                        setTimeout(resetTwoCards, 2000);
+                        setTimeout(resetTwoCards, 1000);
                         return;
                     } // end of 2nd if block
 
                 } // end of 1st if block
 
             } // end of function card_clicked
-
-
-
-
         </script>
     </head>
 
@@ -150,6 +137,7 @@
                 <div class="card_row"> <!-- 1st card row -->
                     <div class="col-xs-2 card">                     <!-- card 1 -->
                         <div class = "front">
+                            <p>hot</p>
                             <img src="images/DV1_dune1.jpg" alt="death valley sand dune image 1" width="100">
                         </div>
 
@@ -159,6 +147,7 @@
                     </div>
                     <div class="col-xs-2 card">                     <!-- card 2 -->
                         <div class = "front">
+                            <p>hot</p>
                             <img src="images/DV1_dune1.jpg" alt="death valley sand dune image 1" width="100">
                         </div>
 
@@ -168,6 +157,7 @@
                     </div>
                     <div class="col-xs-2 card">                     <!-- card 3 -->
                         <div class = "front">
+                            <p>cold</p>
                             <img src="images/DV4_dune4.jpg" alt="death valley sand dune image 4" width="100">
                         </div>
 
@@ -177,6 +167,7 @@
                     </div>
                     <div class="col-xs-2 card">                     <!-- card 4 -->
                         <div class = "front">
+                            <p>cold</p>
                             <img src="images/DV4_dune4.jpg" alt="death valley sand dune image 4" width="100">
                         </div>
 
