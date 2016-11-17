@@ -1,10 +1,10 @@
-<!--    Memory Match project    Vernon Louie    C11.16      November xx, 2016   -->
+<!--    Memory Match project v0.5    Vernon Louie    C11.16      November 17, 2016   -->
 
 <!doctype html>
 <html>
 
     <head>
-        <title> memory match </title>
+        <title> mem match </title>
         <link rel="stylesheet" href="style2.css">
 
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"</script>
@@ -16,11 +16,12 @@
 
         <script>
             $(document).ready(function(){
-                $("#card1").click(function(){
-                    console.log()
-                    $('.card_front').toggleClass("card_back");
+                $(".card > .back").click(function(){
+                    console.log("I've selected elements that have .back class within .card class")
+                    $(this).toggleClass("make_opaque");
                 });
             });
+
         </script>
     </head>
 
@@ -44,34 +45,34 @@
         <div class = "bottom_container">
             <div class = "left_side"> Stats
                 <div class = "first_top games-played">
-                    <h4 class = "label">
+                    <h2 class = "label">
                         Games Played:
-                    </h4>
+                    </h2>
                     <p class = "value">
                         88
                     </p>
                 </div>
 
                 <div class = "first_top attempts">
-                    <h4 class = "label">
+                    <h2 class = "label">
                         Attempts:
-                    </h4>
+                    </h2>
                     <p class = "value">
                         19
                     </p>
                 </div>
 
                 <div class = "first_top">
-                    <h4 class = "label">
+                    <h2 class = "label">
                         Accuracy:
-                    </h4>
+                    </h2>
                     <p class = "value">
                         21%
                     </p>
                 </div>
 
                 <div class = "first_top">
-                    <button type="button" class="btn btn-default reset" data-dismiss="modal">Reset Game </button>
+                    <button type="button" class="btn btn-default reset jam" data-dismiss="modal">Reset Game </button>
                 </div>
             </div>
 
@@ -80,113 +81,56 @@
                 <div class="card_row">
                     <div class="col-xs-2 card">
                         <div class = "front">
-                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                            <img src="images/DV1_dune1.jpg" alt="death valley sand dune image 1" width="100">
                         </div>
 
                         <div class = "back">
-                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
                         </div>
                     </div>
                     <div class="col-xs-2 card">
                         <div class = "front">
-                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                            <img src="images/DV2_dune2.jpg" alt="death valley sand dune image 2" width="100">
                         </div>
 
                         <div class = "back">
-                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
                         </div>
                     </div>
                     <div class="col-xs-2 card">
                         <div class = "front">
-                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                            <img src="images/DV3_dune3.jpg" alt="death valley sand dune image 3" width="100">
                         </div>
 
                         <div class = "back">
-                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
                         </div>
                     </div>
                     <div class="col-xs-2 card">
                         <div class = "front">
-                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                            <img src="images/DV4_dune4.jpg" alt="death valley sand dune image 4" width="100">
                         </div>
 
                         <div class = "back">
-                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
                         </div>
                     </div>
                     <div class="col-xs-2 card">
                         <div class = "front">
-                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                            <img src="images/DV5_dune5.jpg" alt="death valley sand dune image 5" width="100">
                         </div>
 
                         <div class = "back">
-                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
                         </div>
                     </div>
                     <div class="col-xs-2 card">
                         <div class = "front">
-                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                            <img src="images/DV6_dune6.jpg" alt="death valley sand dune image 6" width="100">
                         </div>
 
                         <div class = "back">
-                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card_row">
-                    <div class="col-xs-2 card">
-                        <div class = "front">
-                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
-                        </div>
-
-                        <div class = "back">
-                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
-                        </div>
-                    </div>
-                    <div class="col-xs-2 card">
-                        <div class = "front">
-                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
-                        </div>
-
-                        <div class = "back">
-                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
-                        </div>
-                    </div>
-                    <div class="col-xs-2 card">
-                        <div class = "front">
-                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
-                        </div>
-
-                        <div class = "back">
-                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
-                        </div>
-                    </div>
-                    <div class="col-xs-2 card">
-                        <div class = "front">
-                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
-                        </div>
-
-                        <div class = "back">
-                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
-                        </div>
-                    </div>
-                    <div class="col-xs-2 card">
-                        <div class = "front">
-                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
-                        </div>
-
-                        <div class = "back">
-                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
-                        </div>
-                    </div>
-                    <div class="col-xs-2 card">
-                        <div class = "front">
-                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
-                        </div>
-
-                        <div class = "back">
-                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
                         </div>
                     </div>
                 </div>
@@ -194,63 +138,118 @@
                 <div class="card_row">
                     <div class="col-xs-2 card">
                         <div class = "front">
-                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                            <img src="images/DV7_mason_sleeping.jpg" alt="mason sleeping image" width="100">
                         </div>
 
                         <div class = "back">
-                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
                         </div>
                     </div>
                     <div class="col-xs-2 card">
                         <div class = "front">
-                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                            <img src="images/DV8_mosaic.jpg" alt="mosaic canyon image" width="100">
                         </div>
 
                         <div class = "back">
-                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
                         </div>
                     </div>
                     <div class="col-xs-2 card">
                         <div class = "front">
-                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                            <img src="images/DV9_Mason_mosaic.jpg" alt="mason sliding image" width="100">
                         </div>
 
                         <div class = "back">
-                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
                         </div>
                     </div>
                     <div class="col-xs-2 card">
                         <div class = "front">
-                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                            <img src="images/DV1_dune1.jpg" alt="death valley sand dune image 1" width="100">
                         </div>
 
                         <div class = "back">
-                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
                         </div>
                     </div>
                     <div class="col-xs-2 card">
                         <div class = "front">
-                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                            <img src="images/DV2_dune2.jpg" alt="death valley sand dune image 2" width="100">
                         </div>
 
                         <div class = "back">
-                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
                         </div>
                     </div>
                     <div class="col-xs-2 card">
                         <div class = "front">
-                            <img src="20161029_161254.jpg" alt="death valley image" width="100">
+                            <img src="images/DV3_dune3.jpg" alt="death valley sand dune image 3" width="100">
                         </div>
 
                         <div class = "back">
-                            <img src="15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card_row">
+                    <div class="col-xs-2 card">
+                        <div class = "front">
+                            <img src="images/DV4_dune4.jpg" alt="death valley sand dune image 4" width="100">
+                        </div>
+
+                        <div class = "back">
+                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                        </div>
+                    </div>
+                    <div class="col-xs-2 card">
+                        <div class = "front">
+                            <img src="images/DV5_dune5.jpg" alt="death valley sand dune image 5" width="100">
+                        </div>
+
+                        <div class = "back">
+                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                        </div>
+                    </div>
+                    <div class="col-xs-2 card">
+                        <div class = "front">
+                            <img src="images/DV6_dune6.jpg" alt="death valley sand dune image 6" width="100">
+                        </div>
+
+                        <div class = "back">
+                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                        </div>
+                    </div>
+                    <div class="col-xs-2 card">
+                        <div class = "front">
+                            <img src="images/DV7_mason_sleeping.jpg" alt="mason sleeping image" width="100">
+                        </div>
+
+                        <div class = "back">
+                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                        </div>
+                    </div>
+                    <div class="col-xs-2 card">
+                        <div class = "front">
+                            <img src="images/DV8_mosaic.jpg" alt="mosaic canyon image" width="100">
+                        </div>
+
+                        <div class = "back">
+                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
+                        </div>
+                    </div>
+                    <div class="col-xs-2 card">
+                        <div class = "front">
+                            <img src="images/DV9_Mason_mosaic.jpg" alt="mason sliding image" width="100">
+                        </div>
+
+                        <div class = "back">
+                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- <div class = "card_front"> card 1 front </div> -->
-        <!-- <div class = "card"> card back </div>  -->
 
     </body>
 

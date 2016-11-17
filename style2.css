@@ -27,7 +27,6 @@ header {
     width:              90vw;
 
     background-color:   lightgray;
-    border:             0.1em solid magenta;
     text-align:         center;
     border-radius:      0.5em;
     margin:             auto;
@@ -38,7 +37,6 @@ header {
     width:              14%;
 
     background-color:   darkgray;
-    border:             0.1em solid deeppink;
     text-align:         center;
     display:            inline-block;
     border-radius:      0.5em;
@@ -47,24 +45,24 @@ header {
 }
 
 .title {
-    border:             0.1em solid magenta;
     height:             4em;
     width:              50%;
+    background-color:   green;
     display:            inline-block;
     margin-top:         0.5em;
 }
 
 .settings {
-    border:             0.1em solid magenta;
     height:             4em;
     width:              24%;
+    background-color:   blue;
     display:            inline-block
 }
 
 .about {
-    border:             0.1em solid magenta;
     height:             4em;
     width:              10%;
+    background-color:   pink;
     display:            inline-block;
     float:              right;
     margin-top:         0.5em;
@@ -74,8 +72,7 @@ header {
 .bottom_container {
     height:             80vh;
     width:              90vw;
-    background-color:   lightgray;
-    border:             0.1em solid magenta;
+    background-color:   purple;
     text-align:         center;
     border-radius:      0.5em;
     margin:             auto;
@@ -85,8 +82,7 @@ header {
 .left_side {
     height:             70vh;
     width:              19%;
-    background-color:   lightgray;
-    border:             0.1em solid magenta;
+    background-color:   gray;
     text-align:         center;
     border-radius:      0.5em;
     display:            inline-block;
@@ -96,7 +92,7 @@ header {
     .first_top {
         height:             5em;
         width:              90%;
-        border:             0.1em solid magenta;
+        background-color:   brown;
         margin:             0.2em 0 0 0.2em;
     }
 
@@ -120,24 +116,22 @@ header {
 
     }
     .second_top {
-        border:             0.1em solid magenta;
+        background-color:   orange;
     }
 
     .third_top {
-        border:             0.1em solid magenta;
+        background-color:   teal;
     }
 
     .fourth_top {
-        border:             0.1em solid magenta;
+        background-color:   fuchsia;
     }
 
 /* game area and its elements within bottom container */
 #game_area {
     height:             80vh;
     width:              80%;
-
-    background-color:   lightgray;
-    border:             0.1em solid magenta;
+    background-color:   aquamarine;
     text-align:         center;
     border-radius:      0.5em;
     margin:             auto;
@@ -153,6 +147,7 @@ header {
     .card {
         border:             0.1em dashed brown;
         height:             99%;
+        background-color:   lightpink;
         position:           absolute;
     }
 
@@ -165,8 +160,13 @@ header {
         bottom:             4em;
         padding-right:      0px;
         opacity:            0.7;
+        /* display:            none; */
+        /* visibility:         hidden; */
     }
 
+    .make_opaque {
+        opacity:        0;
+    }
 /*
 *:before,
 *:after {
