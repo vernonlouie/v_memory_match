@@ -39,8 +39,9 @@
                 $(".games_played p").text(games_played);
                 $(".attempts p").text(attempts);
 
-                // convert from decimal fraction to a percentage
-                $(".accuracy p").text(accuracy*100 + "%");
+                var percent_accuracy = accuracy * 100;          // convert to a number betweeen 0 and 100
+                percent_accuracy = percent_accuracy.toFixed(1); // round number to 1 decimal point
+                $(".accuracy p").text(percent_accuracy + "%");
             }
 
             function reset_stats () {
@@ -121,7 +122,7 @@
 
         <div class = "bottom_container"> <!-- contains both "left side" and "game area" divs -->
 
-            <div class = "left_side"> Stats
+            <div class = "left_side"> <b>Stats</b>
                 <div class = "first_top games_played">
                     <h2 class = "label">
                         Games Played:
