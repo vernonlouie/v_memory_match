@@ -14,27 +14,18 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 
         <script>
-//          $(document).ready(function (){
-//                $(".card > .back").click(function (){
-//                    console.log("I've selected elements that have .back class within .card class")
-//                    $(this).toggleClass("make_opaque");
-//                });
-//            });
-
             var first_card_clicked = null;
             var second_card_clicked = null;
+
             var total_possible_matches = 2;
             var match_counter = 0;
-
-            var match_counter = 0;
-            var attempts = 4;
-            var accuracy = 0.83;
+            var attempts = 0;
+            var accuracy = 0;
             var games_played = 0;
 
             $(document).ready(function () {
-                console.log("document is ready");
-                $(".back").click(card_clicked);
-                $(".reset").click(reset_clicked);
+                $(".back").click(card_clicked);     // Call function card_clicked when clicking on a card
+                $(".reset").click(reset_clicked);   // Call function reset_clicked when clicking on the reset button
             });
 
             function resetTwoCards () {
@@ -45,13 +36,11 @@
             }
 
             function display_stats () {
-                console.log("in function display_stats");
-
                 $(".games_played p").text(games_played);
                 $(".attempts p").text(attempts);
 
-                accuracy = accuracy * 100;
-                $(".accuracy p").text(accuracy + "%");
+                // convert from decimal fraction to a percentage
+                $(".accuracy p").text(accuracy*100 + "%");
             }
 
             function reset_stats () {
@@ -62,21 +51,13 @@
             }
 
             function reset_clicked () {
-                if
                 games_played++;
                 reset_stats();
-                display_stats();
                 $(".back").removeClass("make_opaque");
                 $('#game_area h3').remove(); // removes h3 element containing "You have won! Word to the mother!"
             }
 
             function card_clicked () {
-//                console.log("1st_card_clicked: ", first_card_clicked);
-//                console.log("2nd_card_clicked: ", second_card_clicked);
-//                console.log("this: ",this);
-
-                display_stats();
-
                 $(this).toggleClass("make_opaque");
 
                 if (first_card_clicked === null) {
@@ -85,16 +66,22 @@
                 else {
                     second_card_clicked = this;
 
+                    attempts++;
+                    accuracy = match_counter / attempts;
+                    display_stats();
+
                     var first_img = $(first_card_clicked).parent().children(".front").find("img").attr('src');
                     var second_img = $(second_card_clicked).parent().children(".front").find("img").attr('src');
-                    console.log("first_img: ", first_img);
-                    console.log("second_img: ", second_img);
+                    // console.log("attempts: ", attempts);
 
                     if (first_img == second_img) {
                         match_counter++;
+                        accuracy = match_counter / attempts;
+                        display_stats();
+
                         first_card_clicked = null;
                         second_card_clicked = null;
-                        console.log("1st = 2nd and match counter is: ", match_counter);
+                        // console.log("match counter is: ", match_counter);
 
                         if (match_counter === total_possible_matches) {
                             $('#game_area').append("<h3>You have won!  Word to the mother!</h3>");
@@ -111,8 +98,6 @@
                 } // end of 1st if block
 
             } // end of function card_clicked
-
-
 
         </script>
     </head>
@@ -142,7 +127,7 @@
                         Games Played:
                     </h2>
                     <p class = "value">
-                        45
+                        0
                     </p>
                 </div>
 
@@ -151,7 +136,7 @@
                         Attempts:
                     </h2>
                     <p class = "value">
-                        36
+                       0
                     </p>
                 </div>
 
@@ -160,7 +145,7 @@
                         Accuracy:
                     </h2>
                     <p class = "value">
-                        21%
+                        0%
                     </p>
                 </div>
 
