@@ -1,4 +1,4 @@
-<!--    Memory Match project v0.5    Vernon Louie    C11.16      November 17, 2016   -->
+<!--    Memory Match project v1.0    Vernon Louie    C11.16      November 18, 2016   -->
 
 <!doctype html>
 <html>
@@ -7,6 +7,7 @@
         <title> mem match </title>
         <link rel="stylesheet" href="style2.css">
 
+        <script src=""></script>
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"</script>
         <script src="http://learning-fuze.github.io/memory_match/v0.1/script.js"</script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -52,9 +53,12 @@
             }
 
             function reset_clicked () {
-                games_played++;
+                if (match_counter === total_possible_matches) {
+                    games_played++;  // only if player has completed game then player gets credit for a game played
+                }
+
                 reset_stats();
-                $(".back").removeClass("make_opaque");
+                $(".back").removeClass("make_opaque"); // card backs are put back in place by making them visible again
                 $('#game_area h3').remove(); // removes h3 element containing "You have won! Word to the mother!"
             }
 

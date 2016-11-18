@@ -1,4 +1,4 @@
-
+/* .card_front and .card_back not currently used
 .card_front {
     height:             100px;
     width:              50px;
@@ -16,9 +16,11 @@
     text-align:         center;
 }
 
+*/
+
 body {
     background-color:   lightyellow;
-    font-family:        Verdana;
+    font-family:        Verdana, Arial;
 }
 
 /* Header and its elements */
@@ -116,6 +118,8 @@ header {
     .reset {
 
     }
+
+    /* not currently used, but was supposed to be for div containers for "attempts" div, "accuracy" div and "reset" div
     .second_top {
         background-color:   orange;
     }
@@ -127,6 +131,8 @@ header {
     .fourth_top {
         background-color:   fuchsia;
     }
+
+    */
 
 /* game area and its elements within bottom container */
 #game_area {
@@ -161,52 +167,14 @@ header {
         bottom:             4em;
         padding-right:      0px;
         opacity:            0.7;
-        /* display:            none; */
-        /* visibility:         hidden; */
     }
 
     .make_opaque {
         opacity:        0;
     }
+
+
 /*
-*:before,
-*:after {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-body {
-    text-align: center;
-}
-
-div {
-    border: 3px solid black;
-    border-radius: 8px;
-    display: inline-block;
-    font-size: 35px;
-    height: 250px;
-    margin: 15px;
-    padding-top: 90px;
-    width: 250px;
-}
-
-.blue {
-    background-color: blue;
-}
-
-.green {
-    background-color: green;
-}
-
-.red {
-    background-color: red;
-}
-
-.pink {
-    background-color: pink;
-}
-
 .card-back,
 .flag,
 .path {
@@ -226,15 +194,6 @@ div {
 
 .path {
     background-image: url("images/optional_path.jpg");
-}
-
-.no-select {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 
 */
