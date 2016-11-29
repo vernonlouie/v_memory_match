@@ -146,13 +146,13 @@ header {
 }
 
     .card_row {
-     /*   border:             0.1em dotted black; */
+        border:             0.1em dotted black;
         height:             30%;
         margin:             0.2em;
     }
 
     .card {
-     /*   border:             0.1em dashed brown; */
+        border:             0.1em dashed brown;
         height:             99%;
         background-color:   lightpink;
         position:           absolute;
