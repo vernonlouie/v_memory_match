@@ -23,6 +23,7 @@ function resetTwoCards () {
 
 function display_stats () {
     $(".games_played .value").text(games_played);
+    $(".matches .value").text(match_counter);
     $(".attempts .value").text(attempts);
 
     var percent_accuracy = accuracy * 100;          // convert to a number betweeen 0 and 100
@@ -38,9 +39,9 @@ function reset_stats () {
 }
 
 function reset_clicked () {
-    if (match_counter === total_possible_matches) {
+    // if (match_counter === total_possible_matches) {
         games_played++;  // only if player has completed game then player gets credit for a game played
-    }
+    // }
 
     reset_stats();
     $(".back").removeClass("make_opaque"); // card backs are put back in place by making them visible again
