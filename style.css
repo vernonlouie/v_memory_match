@@ -1,5 +1,13 @@
 body {
-    background-image:   url("images/Vern_think.jpg");
+    background-image:   url("images/m856jFo-free-my-little-pony-wallpaper.jpg");
+}
+
+html {
+    background: url(images/m856jFo-free-my-little-pony-wallpaper.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 #aboutme    {
@@ -15,10 +23,10 @@ body {
             }
 
 .nav        {
-                text-align:         center;
-                list-style-type:    none;
-                font-size:          20px;
-            }
+            text-align:         center;
+            list-style-type:    none;
+            font-size:          20px;
+        }
 
 .space  {
             display:    inline;

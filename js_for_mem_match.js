@@ -41,6 +41,7 @@ function reset_stats () {
 function reset_clicked () {
     // if (match_counter === total_possible_matches) {
         games_played++;  // only if player has completed game then player gets credit for a game played
+        console.log('games played: ' + games_played);
     // }
 
     reset_stats();
