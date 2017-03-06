@@ -1,34 +1,26 @@
-/* .card_front and .card_back not currently used
-.card_front {
-    height:             100px;
-    width:              50px;
-    background-color:   lightgray;
-    border:             2px solid magenta;
-    text-align:         center;
-    border-radius:      10px;
-}
-
-.card_back {
-    height:             100px;
-    width:              50px;
-    background-color:   yellow;
-    border:             2px solid magenta;
-    text-align:         center;
-}
-
-*/
 
 body {
-    background-color:   lightyellow;
     font-family:        Verdana, Arial;
+}
+
+/*body {*/
+    /*background-image:   url("images/background_pony.jpg");*/
+/*}*/
+
+body {
+    background: url(images/background_pony.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 /* Header and its elements */
 header {
-    height:             5em;
+    /*height:             5em;*/
     width:              90vw;
 
-    background-color:   lightgray;
+    /*background-color:   lightgray;*/
     text-align:         center;
     border-radius:      0.5em;
     margin:             auto;
@@ -49,9 +41,10 @@ header {
 .title {
     height:             4em;
     width:              50%;
-    background-color:   green;
+    /*background-color:   green;*/
     display:            inline-block;
     margin-top:         0.5em;
+
 }
 
 .settings {
@@ -72,11 +65,12 @@ header {
 
 /* Bottom container and its elements */
 .bottom_container {
-    height:             80vh;
-    width:              90vw;
+    /*height:             80vh;*/
+    /*width:              90vw;*/
     /* background-color:   purple; */
     text-align:         center;
     border-radius:      3em;
+    border:         1px black dotted;
     margin:             auto;
 }
 
@@ -84,15 +78,15 @@ header {
 .left_side {
     height:             70vh;
     width:              19%;
-    background-color:   gray;
     text-align:         center;
     border-radius:      2em;
     display:            inline-block;
     vertical-align:     top;
+    border:             1px yellow dotted;
 }
 
     .first_top {
-        height:             5em;
+        height:             3em;
         width:              90%;
         background-color:   brown;
         margin:             0.2em 0 0 0.2em;
@@ -138,9 +132,9 @@ header {
 #game_area {
     height:             80vh;
     width:              80%;
-    /* background-color:   aquamarine; */
     text-align:         center;
     border-radius:      0.5em;
+    border:             1px blue solid;
     margin:             auto;
     display:            inline-block;
 }
@@ -164,36 +158,12 @@ header {
 
     .back {
         position:           relative;
-        bottom:             4em;
-        padding-right:      0px;
-        opacity:            0.7;
+        bottom:             10em;
+        padding-right:      1em;
+        opacity:            0.9;
     }
 
     .make_opaque {
         opacity:        0;
     }
 
-
-/*
-.card-back,
-.flag,
-.path {
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: contain;
-}
-
-
-.card-back {
-    background-image: url("images/card_design.png");
-}
-
-.flag {
-    background-image: url("images/british_flag.jpg");
-}
-
-.path {
-    background-image: url("images/optional_path.jpg");
-}
-
-*/

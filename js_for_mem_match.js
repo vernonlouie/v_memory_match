@@ -47,6 +47,7 @@ function reset_clicked () {
     reset_stats();
     $(".back").removeClass("make_opaque"); // card backs are put back in place by making them visible again
     $('#game_area h3').remove(); // removes h3 element containing "You have won! Word to the mother!"
+    $(".reset").click(reset_clicked);   // Call function reset_clicked when clicking on the reset button
 }
 
 function card_clicked () {
