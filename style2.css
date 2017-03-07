@@ -131,7 +131,7 @@ header {
 /* game area and its elements within bottom container */
 #game_area {
     height:             80vh;
-    width:              80%;
+    width:              70%;
     text-align:         center;
     border-radius:      0.5em;
     border:             1px blue solid;
@@ -158,9 +158,10 @@ header {
 
     .back {
         position:           relative;
-        bottom:             10em;
+        bottom:             10.22em;
+        left:               0.5em;
         padding-right:      1em;
-        opacity:            0.9;
+        opacity:            0.6;
     }
 
     .make_opaque {
