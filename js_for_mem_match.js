@@ -11,49 +11,40 @@ var games_played = 0;
 
 $(document).ready(function () {
     var card;
-    var slot_a;
-    var slot_b;
+    var card_img;
+    var slot;
+
+    randomizedArray = generateRandomCardSlots();
+    // console.log("randomizedArray: " + randomizedArray);
+
+    for (var h=0; h <= 9; h+=9) {
+        for (var i=1; i <= 9; i++) {
+            if (i === 4) {
+                card = "images/pony4b.png";
+            } else {
+                card = "images/pony" + i + "b.jpg";
+            }
+
+            slot = "#slot" + randomizedArray[i-1+h];
+            // console.log("i: " + i + ".  card: " + card + ".  slot: " + slot);
+
+            card_img = $("<img>",
+                {
+                    src:    card,
+                    alt:    "pony" + i,
+                    width:  85
+                });
+
+            $(slot).append(card_img);
+        } // end of inner for loop
+    } // end of outer for loop
 
     $(".back").click(card_clicked);     // Call function card_clicked when clicking on a card
     $(".reset").click(reset_clicked);   // Call function reset_clicked when clicking on the reset button
-
-    randomizedArray = generateRandomCardSlots();
-    console.log("randomizedArray: " + randomizedArray);
-
-    // for (var i=1; i < 10; i++) {
-    //     if (i === 4) {
-    //         card = "pony4.png";
-    //         slot_a = "#slot7";
-    //         slot_b = "#slot8";
-    //     } else {
-    //         card = "pony" + i + "b.jpg";
-    //         slot_a = "#slot" + i;
-    //         slot_b = "#slot" + (i+1);
-    //     }
-    //
-    //     var card_img = $("<img>",
-    //         {
-    //             src:    card,
-    //             alt:    "pony" + i,
-    //             width:  90
-    //         });
-    //
-    //     $(slot_a).append(card_img);
-    //     $(slot_b).append(card_img);
-    //     // $("<img src>").attr("width","95");
-    // }
-
-    // var card_img = $("<img src=card alt='pony 3' width='95'>", {
-    //     alt:    "pony 3",
-    //     width:  95
-    // });
-
-
-
 });
 
 function generateRandomCardSlots () {
-    var array_ordered = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
+    var array_ordered = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
     var array_randomized = [];
     var count = 0;
     var rndm_num;
@@ -65,10 +56,10 @@ function generateRandomCardSlots () {
             if (rndm_num === array_ordered[j]) {
                 array_ordered.splice(j,1);
                 array_randomized.push(rndm_num);
-                console.log("array_randomized: " + array_randomized + ".  array_ordered: " + array_ordered);
+                // console.log("array_randomized: " + array_randomized + ".  array_ordered: " + array_ordered);
             }
         }
-        console.log("count: " + count++);
+        // console.log("count: " + count++);
     }
     return array_randomized;
 }

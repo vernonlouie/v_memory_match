@@ -77,12 +77,13 @@ header {
 /* left side bar within bottom container and its elements */
 .left_side {
     height:             70vh;
-    width:              19%;
+    width:              20%;
     text-align:         center;
     border-radius:      2em;
     display:            inline-block;
     vertical-align:     top;
-    border:             1px yellow dotted;
+    padding-left:       2em;
+    /*border:             1px yellow dotted;*/
 }
 
     .first_top {
@@ -134,7 +135,7 @@ header {
     width:              70%;
     text-align:         center;
     border-radius:      0.5em;
-    border:             1px blue solid;
+    /*border:             1px blue solid;*/
     margin:             auto;
     display:            inline-block;
 }
@@ -158,10 +159,10 @@ header {
 
     .back {
         position:           relative;
-        bottom:             10.22em;
-        left:               0.5em;
+        bottom:             9.5em;
+        left:               0em;
         padding-right:      1em;
-        opacity:            0.6;
+        opacity:            1;
     }
 
     .make_opaque {
