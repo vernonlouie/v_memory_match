@@ -1,88 +1,64 @@
 
 body {
-    font-family:        Verdana, Arial;
-    background: url(images/background_pony.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+    font-family:                Verdana, Arial;
+    background:                 url(images/background_pony.jpg) no-repeat center center fixed;
+    -webkit-background-size:    cover;
+    -moz-background-size:       cover;
+    -o-background-size:         cover;
+    background-size:            cover;
 }
 
 /* Header and its elements */
 header {
-    /*height:             5em;*/
-    width:              90vw;
-
-    /*background-color:   lightgray;*/
-    text-align:         center;
-    border-radius:      0.5em;
-    margin:             auto;
+    /*height:         5em;*/
+    width:          90vw;
+    text-align:     center;
+    border-radius:  0.5em;
+    margin:         auto;
+    /*border:         1px yellow dashed;*/
 }
 
-.logo1 {
-    height:             80%;
-    width:              14%;
+    .title {
+        height:     4em;
+        width:      50%;
+        display:    inline-block;
+        margin:     0 0 2em 0;
+    }
 
-    background-color:   darkgray;
-    text-align:         center;
-    display:            inline-block;
-    border-radius:      0.5em;
-    float:              left;
-    margin:             0.5em 0 0 0.5em;
-}
+    .settings {
+        height:     4em;
+        width:      40%;
+        display:    inline-block;
+        /*border:     black dotted 1px;*/
+    }
 
-.title {
-    height:             4em;
-    width:              50%;
-    /*background-color:   green;*/
-    display:            inline-block;
-    margin-top:         0.5em;
-
-}
-
-.settings {
-    height:             4em;
-    width:              24%;
-    background-color:   blue;
-    display:            inline-block
-}
-
-.about {
-    height:             4em;
-    width:              10%;
-    background-color:   pink;
-    display:            inline-block;
-    float:              right;
-    margin-top:         0.5em;
-}
 
 /* Bottom container and its elements */
 .bottom_container {
-    /*height:             80vh;*/
-    /*width:              90vw;*/
-    /* background-color:   purple; */
-    text-align:         center;
-    border-radius:      3em;
+    /*height:         80vh;*/
+    /*width:          90vw;*/
+    text-align:     center;
+    border-radius:  3em;
     border:         1px black dotted;
-    margin:             auto;
+    margin:         auto;
 }
 
 /* left side bar within bottom container and its elements */
 .left_side {
-    height:             70vh;
-    width:              20%;
-    text-align:         center;
-    border-radius:      2em;
-    display:            inline-block;
-    vertical-align:     top;
-    padding-left:       2em;
+    height:         70vh;
+    width:          20%;
+    text-align:     center;
+    border-radius:  2em;
+    display:        inline-block;
+    vertical-align: top;
+    padding-left:   2em;
     /*border:             1px yellow dotted;*/
 }
 
     .first_top {
         height:             3em;
         width:              90%;
-        background-color:   brown;
+        background-color:   deeppink;
         margin:             0.2em 0 0 0.2em;
         border-radius:      1em;
     }
@@ -110,20 +86,6 @@ header {
     .lift {
         margin: 2em 0 0.5em 0;
     }
-    /* not currently used, but was supposed to be for div containers for "attempts" div, "accuracy" div and "reset" div
-    .second_top {
-        background-color:   orange;
-    }
-
-    .third_top {
-        background-color:   teal;
-    }
-
-    .fourth_top {
-        background-color:   fuchsia;
-    }
-
-    */
 
 /* game area and its elements within bottom container */
 #game_area {
@@ -145,7 +107,6 @@ header {
     .card {
      /*   border:             0.1em dashed brown; */
         height:             99%;
-        /* background-color:   lightpink; */
         /* position:           absolute; */
     }
 
