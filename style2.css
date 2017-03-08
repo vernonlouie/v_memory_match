@@ -1,13 +1,6 @@
 
 body {
     font-family:        Verdana, Arial;
-}
-
-/*body {*/
-    /*background-image:   url("images/background_pony.jpg");*/
-/*}*/
-
-body {
     background: url(images/background_pony.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -114,6 +107,9 @@ header {
 
     }
 
+    .lift {
+        margin: 2em 0 0.5em 0;
+    }
     /* not currently used, but was supposed to be for div containers for "attempts" div, "accuracy" div and "reset" div
     .second_top {
         background-color:   orange;

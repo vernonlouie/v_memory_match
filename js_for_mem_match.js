@@ -11,6 +11,7 @@ var games_played = 0;
 
 $(document).ready(function () {
     insertFrontCards();
+    insertBackCards();
     $(".lift").click(lift_clicked);
     $(".back").click(card_clicked);     // Call function card_clicked when clicking on a card
     $(".reset").click(reset_clicked);   // Call function reset_clicked when clicking on the reset button
@@ -32,17 +33,36 @@ function insertFrontCards () {
                 card = "images/pony" + i + "b.jpg";
             }
 
-            slot = "#slot" + randomizedArray[i-1+h];
+            slot = "#slot" + randomizedArray[i-1+h] + " .front";
 
             card_img = $("<img>",
                 {
                     src:    card,
                     alt:    "pony" + i,
-                    width:  85
+                    width:  85,
+                    class:  "card_front"
                 });
 
             $(slot).append(card_img);
         }
+    }
+}
+
+function insertBackCards () {
+    var card_img;
+    var slot;
+
+    for (var i=0; i <= 17; i++) {
+        slot = "#slot" + i + " .back";
+
+        card_img = $("<img>",
+            {
+                src:    "images/card_back_ponyb.jpg",
+                alt:    "back of card",
+                width:  100
+            });
+
+        $(slot).append(card_img);
     }
 }
 
@@ -57,7 +77,7 @@ function generateRandomCardSlots () {
 
         for (var j=0; j < array_ordered.length; j++) {
             if (rndm_num === array_ordered[j]) {
-                array_ordered.splice(j,1);
+                array_ordered.splice(j,1);          // remove element from original array if rndm_num matches that element
                 array_randomized.push(rndm_num);
             }
         }
@@ -98,19 +118,15 @@ function lift_clicked () {
     setTimeout(function() {$(".back").removeClass("make_opaque")}, 500);
 }
 
-/* */
+/* Removes vestiges of old game and sets up for new game. */
 function reset_clicked () {
-    // if (match_counter === total_possible_matches) {
-        games_played++;  // only if player has completed game then player gets credit for a game played
-        console.log('games played: ' + games_played);
-    // }
-
     reset_stats();
-    $(".back").removeClass("make_opaque"); // card backs are put back in place by making them visible again
-    $('#game_area h3').remove(); // removes h3 element containing "You have won! Word to the mother!"
-    $(".front").remove();   // remove the card front elements
+
+    $('#game_area h3').remove();            // remove h3 element "You have won!"
+    $(".card_front").remove();              // remove the old card front elements
     insertFrontCards();
-    $(".reset").click(reset_clicked);   // Call function reset_clicked when clicking on the reset button
+    $(".back").removeClass("make_opaque");  // card backs are put back in place by making them visible again
+    $(".reset").click(reset_clicked);       // Call function reset_clicked when clicking on the reset button
 }
 
 /* If 1st card clicked, then simply shows card front.  If 2nd card clicked, then checks to see if there is a match with the 1st card. */
@@ -140,10 +156,11 @@ function card_clicked () {
 
             if (match_counter === total_possible_matches) {
                 $('#game_area').append("<h3>You have won!  Word to the mother!</h3>");
+                games_played++;
             }
         }
         else {
             setTimeout(resetTwoCards, 1500);
         }
     }
-} // end of function card_clicked
+}
