@@ -3,7 +3,7 @@
 var first_card_clicked = null;
 var second_card_clicked = null;
 
-var total_possible_matches = 1;
+var total_possible_matches = 9;         // win condition
 var match_counter = 0;
 var attempts = 0;
 var accuracy = 0;
@@ -17,7 +17,7 @@ $(document).ready(function () {
     $(".reset").click(reset_clicked);   // Call function reset_clicked when clicking on the "Reset Game" button
 });
 
-/* Appends the 9 card fronts (2x) randomly into the 18 slots. */
+/* Called by "$(document).ready" and "reset_clicked".  Appends the 9 card fronts (2x) randomly into the 18 slots. */
 function insertFrontCards () {
     var card;
     var card_img;
@@ -49,6 +49,7 @@ function insertFrontCards () {
     $("img").width("90%").height("100%");
 }
 
+/* Called by "$(document).ready".  This function is called only once, since the card backs are never destroyed/removed. */
 function insertBackCards () {
     var card_img;
     var slot;
@@ -67,26 +68,26 @@ function insertBackCards () {
     $("img").width("90%").height("100%");
 }
 
-/* Takes an array (18 elements long) and returns an array of the same elements in random order. */
+/* Called by "insertFrontCards".  Takes an array (18 elements long) and returns an array of the same elements in random order. */
 function generateRandomCardSlots () {
     var array_ordered = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
     var array_randomized = [];
-    var rndm_num;
+    var rndm_num1;
 
     while (array_ordered.length > 0) {
-        rndm_num = Math.floor(Math.random() * 18);
+        rndm_num1 = Math.floor(Math.random() * 18);
 
         for (var j=0; j < array_ordered.length; j++) {
-            if (rndm_num === array_ordered[j]) {
+            if (rndm_num1 === array_ordered[j]) {
                 array_ordered.splice(j,1);          // remove element from original array if rndm_num matches that element
-                array_randomized.push(rndm_num);
+                array_randomized.push(rndm_num1);
             }
         }
     }
     return array_randomized;
 }
 
-/* Assuming there are 2 cards clicked and therefore opaque (card front is visible), makes the card back visible so card front is no longer visible to user. */
+/* Called by "card_clicked".  Assuming there are 2 cards clicked and therefore opaque (card front is visible), makes the card back visible so card front is no longer visible to user. */
 function resetTwoCards () {
     $(first_card_clicked).toggleClass("make_opaque");
     $(second_card_clicked).toggleClass("make_opaque");
@@ -94,7 +95,7 @@ function resetTwoCards () {
     second_card_clicked = null;
 }
 
-/* Generates or affects text in "stats" area (left_side div). */
+/* Called by multiple functions.  Generates or affects text in "stats" area (left_side div). */
 function display_stats () {
     $(".games_played .value").text(games_played);
     $(".matches .value").text(match_counter);
@@ -105,7 +106,7 @@ function display_stats () {
     $(".accuracy .value").text(percent_accuracy + "%");
 }
 
-/* Resets to zero and then displays. */
+/* Called by "reset_clicked".  Resets to zero and then displays. */
 function reset_stats () {
     accuracy = 0;
     match_counter = 0;
@@ -113,7 +114,7 @@ function reset_stats () {
     display_stats();
 }
 
-/* "Lifts" card backs for 1/2 second so users can see card fronts momentarily. */
+/* Called by "Lift Cards" button.  "Lifts" card backs for 1/2 second so users can see card fronts momentarily. */
 function lift_clicked () {
     var audioOhNo = document.getElementById("ohNo");
     audioOhNo.play();
@@ -122,7 +123,7 @@ function lift_clicked () {
     setTimeout(function() {$(".back").toggleClass("make_opaque")}, 500);
 }
 
-/* Removes vestiges of old game and sets up for new game. */
+/* Called by: "Reset button".  Removes vestiges of old game and sets up for new game. */
 function reset_clicked () {
     var audioCardShuffle = document.getElementById("cardShuffle");
     audioCardShuffle.play();
@@ -131,15 +132,30 @@ function reset_clicked () {
     $('#game_area h3').remove();            // remove h3 element "You have won!"
     $(".card_front").remove();              // remove the old card front elements
     insertFrontCards();
-    $(".back").removeClass("make_opaque");  // card backs are put back in place by making them visible again
+    $(".back").removeClass("make_opaque").removeClass("matched");  // card backs are put back in place by making them visible again
     $(".reset").click(reset_clicked);       // Call function reset_clicked when clicking on the reset button
 }
 
+/* Called by: "card_clicked".  Plays sound clip and flips over the 1 card that was clicked on. */
 function flip_card (cardBack) {
     var audioCardFlip = document.getElementById("cardFlip");
     audioCardFlip.play();
 
     $(cardBack).toggleClass("make_opaque");
+}
+
+/* Called by: "card_clicked".  Removes old phrase, if any, and displays phrase "Choose an unflipped card" in a random color. */
+function card_already_flipped () {
+    var rndm_num2;
+    var phrase_color;
+    var colorArray = ["purple", "deeppink", "blue", "darkblue", "magenta", "hotpink", "darkmagenta", "green", "darkgreen"];
+
+    $('#game_area h3').remove();
+
+    rndm_num2 = Math.floor(Math.random() * 9);
+    phrase_color = colorArray[rndm_num2];
+    $('#game_area').append("<h3> Choose an unflipped card </h3>");
+    $('#game_area h3').css("color", phrase_color);
 }
 
 /* If 1st card clicked, then simply shows card front.  If 2nd card clicked, then checks to see if there is a match with the 1st card. */
@@ -151,7 +167,7 @@ function card_clicked () {
     var first_img;
     var second_img;
 
-    var random_number;
+    var rndm_num3;
     var phrase;
     var phrase_element;
     var winningPhrasesArray =
@@ -165,20 +181,19 @@ function card_clicked () {
         ];
 
     if ($(this).hasClass("matched")) {
-        $('#game_area h3').remove();
-        $('#game_area').append("<h3> Please choose a different card </h3>");
-    } else {
+        card_already_flipped();
 
+    } else {
         if (first_card_clicked === null) {
             first_card_clicked = this;
             flip_card(this);
         }
-        else {
+        else if (second_card_clicked === null) {
             second_card_clicked = this;
-
             if (first_card_clicked === second_card_clicked) {
-                $('#game_area h3').remove();
-                $('#game_area').append("<h3> Please choose a different card </h3>");
+                card_already_flipped();
+                second_card_clicked = null;
+
             } else {
                 $('#game_area h3').remove();
                 flip_card(this);
@@ -190,9 +205,7 @@ function card_clicked () {
                 first_img = $(first_card_clicked).parent().children(".front").find("img").attr('src');
                 second_img = $(second_card_clicked).parent().children(".front").find("img").attr('src');
 
-                // console.log("slot1: " + firstSlot + ".  slot2: " + secondSlot);
-
-                if (first_img === second_img) {
+                if (first_img === second_img) {                     // if legitimate match
                     audioYeah = document.getElementById("yeah");
                     audioYeah.play();
 
@@ -210,13 +223,14 @@ function card_clicked () {
                         audioSuccess = document.getElementById("success");
                         audioSuccess.play();
 
-                        random_number = Math.floor(Math.random() * 6);
-                        phrase = winningPhrasesArray[random_number];
+                        rndm_num3 = Math.floor(Math.random() * 6);
+                        phrase = winningPhrasesArray[rndm_num3];
                         phrase_element = $("<h3>",
                             {
                                 text:   phrase
                             });
                         $('#game_area').append(phrase_element);
+                        $('#game_area h3').css("color", "purple");
 
                         games_played++;
                     }
@@ -225,6 +239,9 @@ function card_clicked () {
                     setTimeout(resetTwoCards, 1500);
                 }
             }
+        }
+        else {  // This handles the case where you click on more than 2 cards; i.e., doesn't do anything
+            console.log("2 cards have already been clicked");
         }
     }
 }
