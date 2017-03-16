@@ -135,16 +135,21 @@ function reset_clicked () {
     $(".reset").click(reset_clicked);       // Call function reset_clicked when clicking on the reset button
 }
 
+function flip_card (cardBack) {
+    var audioCardFlip = document.getElementById("cardFlip");
+    audioCardFlip.play();
+
+    $(cardBack).toggleClass("make_opaque");
+}
+
 /* If 1st card clicked, then simply shows card front.  If 2nd card clicked, then checks to see if there is a match with the 1st card. */
 function card_clicked () {
-    var audioCardFlip;
+    // var audioCardFlip;
     var audioYeah;
     var audioSuccess;
 
     var first_img;
     var second_img;
-    var firstSlot;
-    var secondSlot;
 
     var random_number;
     var phrase;
@@ -159,58 +164,67 @@ function card_clicked () {
             "Well played...Twilight Sparkle can fly again!"
         ];
 
-    $(this).toggleClass("make_opaque");
-    audioCardFlip = document.getElementById("cardFlip");
-    audioCardFlip.play();
+    if ($(this).hasClass("matched")) {
+        $('#game_area h3').remove();
+        $('#game_area').append("<h3> Please choose a different card </h3>");
+    } else {
 
-    if (first_card_clicked === null) {
-        first_card_clicked = this;
-    }
-    else {
-        second_card_clicked = this;
-
-        attempts++;
-        accuracy = match_counter / attempts;
-        display_stats();
-
-        first_img = $(first_card_clicked).parent().children(".front").find("img").attr('src');
-        second_img = $(second_card_clicked).parent().children(".front").find("img").attr('src');
-
-        firstSlot = $(first_card_clicked).parent().attr("id");
-        secondSlot = $(second_card_clicked).parent().attr("id");
-
-        console.log("slot1: " + firstSlot + ".  slot2: " + secondSlot);
-
-        if ((first_img === second_img) && (firstSlot !== secondSlot)) {
-            audioYeah = document.getElementById("yeah");
-            audioYeah.play();
-
-            match_counter++;
-            accuracy = match_counter / attempts;
-            display_stats();
-
-            first_card_clicked = null;
-            second_card_clicked = null;
-
-
-
-            if (match_counter === total_possible_matches) {
-                audioSuccess = document.getElementById("success");
-                audioSuccess.play();
-
-                random_number = Math.floor(Math.random() * 6);
-                phrase = winningPhrasesArray[random_number];
-                phrase_element = $("<h3>",
-                    {
-                        text:   phrase
-                    });
-                $('#game_area').append(phrase_element);
-
-                games_played++;
-            }
+        if (first_card_clicked === null) {
+            first_card_clicked = this;
+            flip_card(this);
         }
         else {
-            setTimeout(resetTwoCards, 1500);
+            second_card_clicked = this;
+
+            if (first_card_clicked === second_card_clicked) {
+                $('#game_area h3').remove();
+                $('#game_area').append("<h3> Please choose a different card </h3>");
+            } else {
+                $('#game_area h3').remove();
+                flip_card(this);
+
+                attempts++;
+                accuracy = match_counter / attempts;
+                display_stats();
+
+                first_img = $(first_card_clicked).parent().children(".front").find("img").attr('src');
+                second_img = $(second_card_clicked).parent().children(".front").find("img").attr('src');
+
+                // console.log("slot1: " + firstSlot + ".  slot2: " + secondSlot);
+
+                if (first_img === second_img) {
+                    audioYeah = document.getElementById("yeah");
+                    audioYeah.play();
+
+                    $(first_card_clicked).addClass("matched");
+                    $(second_card_clicked).addClass("matched");
+
+                    match_counter++;
+                    accuracy = match_counter / attempts;
+                    display_stats();
+
+                    first_card_clicked = null;
+                    second_card_clicked = null;
+
+                    if (match_counter === total_possible_matches) {
+                        audioSuccess = document.getElementById("success");
+                        audioSuccess.play();
+
+                        random_number = Math.floor(Math.random() * 6);
+                        phrase = winningPhrasesArray[random_number];
+                        phrase_element = $("<h3>",
+                            {
+                                text:   phrase
+                            });
+                        $('#game_area').append(phrase_element);
+
+                        games_played++;
+                    }
+                }
+                else {
+                    setTimeout(resetTwoCards, 1500);
+                }
+            }
         }
     }
 }
