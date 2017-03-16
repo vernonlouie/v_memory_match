@@ -33,6 +33,7 @@ header {
         width:      50%;
         display:    inline-block;
         margin:     0 0 2em 0;
+        color:      rebeccapurple;
     }
 
     .settings {
@@ -62,6 +63,7 @@ header {
     display:        inline-block;
     vertical-align: top;
     padding-left:   2em;
+    color:          darkblue;
     /*border:             1px yellow dotted;*/
 }
 
@@ -104,6 +106,8 @@ header {
     text-align:         center;
     border-radius:      0.5em;
     /*border:             1px blue solid;*/
+    font-family:    "kinkie";
+    color:          purple;
     margin:             auto;
     display:            inline-block;
 }
@@ -135,4 +139,6 @@ header {
     .make_opaque {
         opacity:        0;
     }
+
+
 

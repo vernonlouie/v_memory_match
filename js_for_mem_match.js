@@ -3,7 +3,7 @@
 var first_card_clicked = null;
 var second_card_clicked = null;
 
-var total_possible_matches = 9;
+var total_possible_matches = 1;
 var match_counter = 0;
 var attempts = 0;
 var accuracy = 0;
@@ -118,8 +118,8 @@ function lift_clicked () {
     var audioOhNo = document.getElementById("ohNo");
     audioOhNo.play();
 
-    $(".back").addClass("make_opaque");
-    setTimeout(function() {$(".back").removeClass("make_opaque")}, 500);
+    $(".back").toggleClass("make_opaque");
+    setTimeout(function() {$(".back").toggleClass("make_opaque")}, 500);
 }
 
 /* Removes vestiges of old game and sets up for new game. */
@@ -137,8 +137,30 @@ function reset_clicked () {
 
 /* If 1st card clicked, then simply shows card front.  If 2nd card clicked, then checks to see if there is a match with the 1st card. */
 function card_clicked () {
+    var audioCardFlip;
+    var audioYeah;
+    var audioSuccess;
+
+    var first_img;
+    var second_img;
+    var firstSlot;
+    var secondSlot;
+
+    var random_number;
+    var phrase;
+    var phrase_element;
+    var winningPhrasesArray =
+        [
+            "You have won!  Word to the mother!",
+            "You've won!  Fluttershy can sparkle!",
+            "Great!  Pinkie Pie will get a perm for her mane!",
+            "Well done, Rainbow Dash is showing her true colors!",
+            "You got them all...Princess Luna is proud of you!",
+            "Well played...Twilight Sparkle can fly again!"
+        ];
+
     $(this).toggleClass("make_opaque");
-    var audioCardFlip = document.getElementById("cardFlip");
+    audioCardFlip = document.getElementById("cardFlip");
     audioCardFlip.play();
 
     if (first_card_clicked === null) {
@@ -151,11 +173,16 @@ function card_clicked () {
         accuracy = match_counter / attempts;
         display_stats();
 
-        var first_img = $(first_card_clicked).parent().children(".front").find("img").attr('src');
-        var second_img = $(second_card_clicked).parent().children(".front").find("img").attr('src');
+        first_img = $(first_card_clicked).parent().children(".front").find("img").attr('src');
+        second_img = $(second_card_clicked).parent().children(".front").find("img").attr('src');
 
-        if (first_img == second_img) {
-            var audioYeah = document.getElementById("yeah");
+        firstSlot = $(first_card_clicked).parent().attr("id");
+        secondSlot = $(second_card_clicked).parent().attr("id");
+
+        console.log("slot1: " + firstSlot + ".  slot2: " + secondSlot);
+
+        if ((first_img === second_img) && (firstSlot !== secondSlot)) {
+            audioYeah = document.getElementById("yeah");
             audioYeah.play();
 
             match_counter++;
@@ -165,11 +192,21 @@ function card_clicked () {
             first_card_clicked = null;
             second_card_clicked = null;
 
+
+
             if (match_counter === total_possible_matches) {
-                $('#game_area').append("<h3>You have won!  Word to the mother!</h3>");
-                games_played++;
-                var audioSuccess = document.getElementById("success");
+                audioSuccess = document.getElementById("success");
                 audioSuccess.play();
+
+                random_number = Math.floor(Math.random() * 6);
+                phrase = winningPhrasesArray[random_number];
+                phrase_element = $("<h3>",
+                    {
+                        text:   phrase
+                    });
+                $('#game_area').append(phrase_element);
+
+                games_played++;
             }
         }
         else {
