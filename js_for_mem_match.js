@@ -12,9 +12,9 @@ var games_played = 0;
 $(document).ready(function () {
     insertFrontCards();
     insertBackCards();
-    $(".lift").click(lift_clicked);
-    $(".back").click(card_clicked);     // Call function card_clicked when clicking on a card
-    $(".reset").click(reset_clicked);   // Call function reset_clicked when clicking on the reset button
+    $(".lift").click(lift_clicked);     // Call function lift_clicked when clicking on "Lift Cards" button
+    $(".back").click(card_clicked);     // Call function card_clicked when clicking on a card back
+    $(".reset").click(reset_clicked);   // Call function reset_clicked when clicking on the "Reset Game" button
 });
 
 /* Appends the 9 card fronts (2x) randomly into the 18 slots. */
@@ -39,13 +39,14 @@ function insertFrontCards () {
                 {
                     src:    card,
                     alt:    "pony" + i,
-                    width:  85,
+                    // width:  85,
                     class:  "card_front"
                 });
 
             $(slot).append(card_img);
         }
     }
+    $("img").width("90%").height("100%");
 }
 
 function insertBackCards () {
@@ -58,12 +59,12 @@ function insertBackCards () {
         card_img = $("<img>",
             {
                 src:    "images/card_back_ponyb.jpg",
-                alt:    "back of card",
-                width:  100
+                alt:    "back of card"
             });
 
         $(slot).append(card_img);
     }
+    $("img").width("90%").height("100%");
 }
 
 /* Takes an array (18 elements long) and returns an array of the same elements in random order. */

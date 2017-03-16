@@ -8,6 +8,15 @@ body {
     background-size:            cover;
 }
 
+@font-face {
+    font-family:    "kinkie";                   /* found this font on www.1001fonts.com/girly-fonts.html */
+    src:            url("fonts/KINKIE__.TTF");
+}
+
+.title {
+    font-family:    "kinkie", Verdana, Arial;
+}
+
 /* Header and its elements */
 header {
     /*height:         5em;*/
@@ -107,19 +116,19 @@ header {
     .card {
      /*   border:             0.1em dashed brown; */
         height:             99%;
-        /* position:           absolute; */
     }
 
     .front {
-
+        height:     100%;
+        width:      100%;
+        position:   absolute;
     }
 
     .back {
-        position:           relative;
-        bottom:             8em;
-        left:               0em;
-        padding-right:      1em;
-        opacity:            1;
+        height:     100%;
+        width:      100%;
+        position:   absolute;
+        opacity:    1;
     }
 
     .make_opaque {
