@@ -45,11 +45,11 @@ header {
 
 /* Bottom container and its elements */
 .bottom_container {
-    /*height:         80vh;*/
+    height:         80vh;
     /*width:          90vw;*/
     text-align:     center;
     border-radius:  3em;
-    border:         1px black dotted;
+    /*border:         1px black dotted;*/
     margin:         auto;
 }
 
