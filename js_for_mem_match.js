@@ -39,7 +39,6 @@ function insertFrontCards () {
                 {
                     src:    card,
                     alt:    "pony" + i,
-                    // width:  85,
                     class:  "card_front"
                 });
 
@@ -115,12 +114,16 @@ function reset_stats () {
 
 /* "Lifts" card backs for 1/2 second so users can see card fronts momentarily. */
 function lift_clicked () {
+    var x = document.getElementById("ohNo");
+    x.play();
     $(".back").addClass("make_opaque");
     setTimeout(function() {$(".back").removeClass("make_opaque")}, 500);
 }
 
 /* Removes vestiges of old game and sets up for new game. */
 function reset_clicked () {
+    var x = document.getElementById("cardShuffle");
+    x.play();
     reset_stats();
 
     $('#game_area h3').remove();            // remove h3 element "You have won!"
@@ -133,6 +136,8 @@ function reset_clicked () {
 /* If 1st card clicked, then simply shows card front.  If 2nd card clicked, then checks to see if there is a match with the 1st card. */
 function card_clicked () {
     $(this).toggleClass("make_opaque");
+    var x = document.getElementById("cardFlip");
+    x.play();
 
     if (first_card_clicked === null) {
         first_card_clicked = this;
@@ -148,6 +153,9 @@ function card_clicked () {
         var second_img = $(second_card_clicked).parent().children(".front").find("img").attr('src');
 
         if (first_img == second_img) {
+            var y = document.getElementById("yeah");
+            y.play();
+
             match_counter++;
             accuracy = match_counter / attempts;
             display_stats();
@@ -158,6 +166,8 @@ function card_clicked () {
             if (match_counter === total_possible_matches) {
                 $('#game_area').append("<h3>You have won!  Word to the mother!</h3>");
                 games_played++;
+                var y = document.getElementById("success");
+                y.play();
             }
         }
         else {
