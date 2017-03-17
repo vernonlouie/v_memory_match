@@ -1,6 +1,6 @@
 /*  Vernon Louie     March 2017     */
 
-var theme = "pokemo";
+var theme = "pokemon";
 var first_card_clicked = null;
 var second_card_clicked = null;
 
@@ -14,9 +14,9 @@ $(document).ready(function () {
     insertTitle();
     insertFrontCards();
     insertBackCards();
-    $(".lift").click(lift_clicked);     // Call function lift_clicked when clicking on "Lift Cards" button
-    $(".back").click(card_clicked);     // Call function card_clicked when clicking on a card back
-    $(".reset").click(reset_clicked);   // Call function reset_clicked when clicking on the "Reset Game" button
+    $(".lift").click(lift_clicked);     // "Lift Cards" button
+    $(".back").click(card_clicked);     // card back
+    $(".reset").click(reset_clicked);   // "Reset Game" button
 
 });
 

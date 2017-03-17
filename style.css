@@ -15,13 +15,9 @@ body {
 }
 
 @font-face {
-    font-family:    "pokeFont";                   /* found this font on www.1001fonts.com/girly-fonts.html */
+    font-family:    "pokeFont";                 /* found this font on www.fontspace.com */
     src:            url("fonts/PokemonSolid.TTF");
 }
-
-/*.title {*/
-    /*font-family:    "kinkie", Verdana, Arial;*/
-/*}*/
 
 /* Header and its elements */
 header {
@@ -38,7 +34,6 @@ header {
         width:      50%;
         display:    inline-block;
         margin:     0 0 2em 0;
-        /*color:      rebeccapurple;*/
     }
 
     .settings {
