@@ -1,21 +1,32 @@
 /*  Vernon Louie     March 2017     */
 
+var theme = "pokemo";
 var first_card_clicked = null;
 var second_card_clicked = null;
 
-var total_possible_matches = 9;         // win condition
+var total_possible_matches = 2;         // win condition
 var match_counter = 0;
 var attempts = 0;
 var accuracy = 0;
 var games_played = 0;
 
 $(document).ready(function () {
+    insertTitle();
     insertFrontCards();
     insertBackCards();
     $(".lift").click(lift_clicked);     // Call function lift_clicked when clicking on "Lift Cards" button
     $(".back").click(card_clicked);     // Call function card_clicked when clicking on a card back
     $(".reset").click(reset_clicked);   // Call function reset_clicked when clicking on the "Reset Game" button
+
 });
+
+function insertTitle () {
+    if (theme === "pokemon") {
+        $('.title h2').prepend("Pokemon ").css("font-family", "pokeFont").css("color", "yellow");
+    } else {
+        $('.title h2').prepend("My Little Pony ").css("font-family", "kinkie").css("color", "rebeccapurple");
+    }
+}
 
 /* Called by "$(document).ready" and "reset_clicked".  Appends the 9 card fronts (2x) randomly into the 18 slots. */
 function insertFrontCards () {
@@ -28,21 +39,28 @@ function insertFrontCards () {
 
     for (var h=0; h <= 9; h+=9) {
         for (var i=1; i <= 9; i++) {            // go thru this loop 2x, when h=0 and h=9.
-            if (i === 4) {
-                card = "images/pony4b.png";     // pony4 is a png; all the rest are jpg
-            } else {
-                card = "images/pony" + i + "b.jpg";
-            }
+            if (theme === "pokemon") {
+                if (i === 3 || i === 4) {
+                    card = "images/pkmn_" + i + ".png";
+                } else {
+                    card = "images/pkmn_" + i + ".jpg";
+                }
 
-            slot = "#slot" + randomizedArray[i-1+h] + " .front";
+            } else {    // My Little Pony theme
+                if (i === 4) {
+                    card = "images/pony4b.png";     // pony4 is a png; all the rest are jpg
+                } else {
+                    card = "images/pony" + i + "b.jpg";
+                }
+            }
 
             card_img = $("<img>",
                 {
                     src:    card,
-                    alt:    "pony" + i,
+                    alt:    "pony or pkmn" + i,
                     class:  "card_front"
                 });
-
+            slot = "#slot" + randomizedArray[i-1+h] + " .front";
             $(slot).append(card_img);
         }
     }
@@ -54,12 +72,18 @@ function insertBackCards () {
     var card_img;
     var slot;
 
+    if (theme === "pokemon") {
+        imageForBackCard = "images/card_back_pkmn.png";
+    } else {
+        imageForBackCard = "images/card_back_ponyb.jpg";
+    }
+
     for (var i=0; i <= 17; i++) {
         slot = "#slot" + i + " .back";
 
         card_img = $("<img>",
             {
-                src:    "images/card_back_ponyb.jpg",
+                src:    imageForBackCard,
                 alt:    "back of card"
             });
 
@@ -170,9 +194,16 @@ function card_clicked () {
     var rndm_num3;
     var phrase;
     var phrase_element;
-    var winningPhrasesArray =
+    var winningPhrasesArray_pokemon =
         [
             "You have won!  Word to the mother!",
+            "Squirtle says you're the best!",
+            "Congratulations!  Pikachu's coming to high-five you!",
+            "You finished!  Ivysaur will now eat you!",
+            "Oh Yeah...Bulbasaur is proud of you!"
+        ];
+    var winningPhrasesArray_pony =
+        [
             "You've won!  Fluttershy can sparkle!",
             "Great!  Pinkie Pie will get a perm for her mane!",
             "Well done, Rainbow Dash is showing her true colors!",
@@ -187,6 +218,7 @@ function card_clicked () {
         if (first_card_clicked === null) {
             first_card_clicked = this;
             flip_card(this);
+            $('#game_area h3').remove();
         }
         else if (second_card_clicked === null) {
             second_card_clicked = this;
@@ -223,14 +255,25 @@ function card_clicked () {
                         audioSuccess = document.getElementById("success");
                         audioSuccess.play();
 
-                        rndm_num3 = Math.floor(Math.random() * 6);
-                        phrase = winningPhrasesArray[rndm_num3];
+                        rndm_num3 = Math.floor(Math.random() * 5);
+                        if (theme === "pokemon") {
+                            phrase = winningPhrasesArray_pokemon[rndm_num3];
+                        } else {
+                            phrase = winningPhrasesArray_pony[rndm_num3];
+                        }
+
                         phrase_element = $("<h3>",
                             {
                                 text:   phrase
                             });
                         $('#game_area').append(phrase_element);
-                        $('#game_area h3').css("color", "purple");
+                        // $('#game_area h3').css("color", "purple");
+
+                        if (theme === "pokemon") {
+                            $('#game_area h3').css("font-family", "pokeFont").css("color", "yellow");
+                        } else {
+                            $('#game_area h3').css("font-family", "kinkie").css("color", "rebeccapurple");
+                        }
 
                         games_played++;
                     }

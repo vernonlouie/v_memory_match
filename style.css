@@ -2,7 +2,7 @@
 
 body {
     font-family:                Verdana, Arial;
-    background:                 url(images/background_pony.jpg) no-repeat center center fixed;
+    background:                 url(images/background_pkmn.jpg) no-repeat center center fixed;
     -webkit-background-size:    cover;
     -moz-background-size:       cover;
     -o-background-size:         cover;
@@ -14,9 +14,14 @@ body {
     src:            url("fonts/KINKIE__.TTF");
 }
 
-.title {
-    font-family:    "kinkie", Verdana, Arial;
+@font-face {
+    font-family:    "pokeFont";                   /* found this font on www.1001fonts.com/girly-fonts.html */
+    src:            url("fonts/PokemonSolid.TTF");
 }
+
+/*.title {*/
+    /*font-family:    "kinkie", Verdana, Arial;*/
+/*}*/
 
 /* Header and its elements */
 header {
@@ -33,7 +38,7 @@ header {
         width:      50%;
         display:    inline-block;
         margin:     0 0 2em 0;
-        color:      rebeccapurple;
+        /*color:      rebeccapurple;*/
     }
 
     .settings {
