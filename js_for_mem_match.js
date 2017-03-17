@@ -14,6 +14,13 @@ $(document).ready(function () {
     insertTitle();
     insertFrontCards();
     insertBackCards();
+
+    if (theme === "pokemon") {
+        $('body').css("background", "url(images/background_pkmn.jpg) no-repeat center center fixed");
+    } else {
+        $('body').css("background", "url(images/background_pony.jpg) no-repeat center center fixed");
+    }
+
     $(".lift").click(lift_clicked);     // "Lift Cards" button
     $(".back").click(card_clicked);     // card back
     $(".reset").click(reset_clicked);   // "Reset Game" button

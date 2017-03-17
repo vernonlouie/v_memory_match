@@ -2,7 +2,7 @@
 
 body {
     font-family:                Verdana, Arial;
-    background:                 url(images/background_pkmn.jpg) no-repeat center center fixed;
+    /*background:                 url(images/background_pkmn.jpg) no-repeat center center fixed;*/
     -webkit-background-size:    cover;
     -moz-background-size:       cover;
     -o-background-size:         cover;
