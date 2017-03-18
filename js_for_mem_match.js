@@ -1,6 +1,6 @@
 /*  Vernon Louie     March 2017     */
 
-var theme = "pokemo";
+var theme = "pokemon";
 var first_card_clicked = null;
 var second_card_clicked = null;
 
@@ -77,12 +77,13 @@ function insertFrontCards () {
 /* Called by "$(document).ready".  This function is called only once, since the card backs are never destroyed/removed. */
 function insertBackCards () {
     var card_img;
+    var image_for_back_card;
     var slot;
 
     if (theme === "pokemon") {
-        imageForBackCard = "images/card_back_pkmn.png";
+        image_for_back_card = "images/card_back_pkmn.png";
     } else {
-        imageForBackCard = "images/card_back_ponyb.jpg";
+        image_for_back_card = "images/card_back_ponyb.jpg";
     }
 
     for (var i=0; i <= 17; i++) {
@@ -90,7 +91,7 @@ function insertBackCards () {
 
         card_img = $("<img>",
             {
-                src:    imageForBackCard,
+                src:    image_for_back_card,
                 alt:    "back of card"
             });
 
