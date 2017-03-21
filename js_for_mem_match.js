@@ -1,19 +1,125 @@
-/*  Memory Match project v1.0    Vernon Louie    C11.16      11/18/2016     */
+/*  Vernon Louie     March 2017     */
 
+var theme = "pokemo";
 var first_card_clicked = null;
 var second_card_clicked = null;
 
-var total_possible_matches = 2;
+var total_possible_matches = 2;         // win condition
 var match_counter = 0;
 var attempts = 0;
 var accuracy = 0;
 var games_played = 0;
 
 $(document).ready(function () {
-    $(".back").click(card_clicked);     // Call function card_clicked when clicking on a card
-    $(".reset").click(reset_clicked);   // Call function reset_clicked when clicking on the reset button
+    insertTitle();
+    insertFrontCards();
+    insertBackCards();
+
+    if (theme === "pokemon") {
+        $('body').css("background", "url(images/background_pkmn.jpg) no-repeat center center fixed");
+    } else {
+        $('body').css("background", "url(images/background_pony.jpg) no-repeat center center fixed");
+    }
+
+    $(".lift").click(liftClicked);     // "Lift Cards" button
+    $(".back").click(cardClicked);     // card back
+    $(".reset").click(resetClicked);   // "Reset Game" button
+
 });
 
+function insertTitle () {
+    if (theme === "pokemon") {
+        $('.title h2').prepend("Pokemon ").css("font-family", "pokeFont").css("color", "yellow");
+    } else {
+        $('.title h2').prepend("My Little Pony ").css("font-family", "kinkie").css("color", "rebeccapurple");
+    }
+}
+
+/* Called by "$(document).ready" and "resetClicked".  Appends the 9 card fronts (2x) randomly into the 18 slots. */
+function insertFrontCards () {
+    var card;
+    var card_img;
+    var slot;
+    var randomized_array;
+
+    randomized_array = generateRandomCardSlots();
+
+    for (var h=0; h <= 9; h+=9) {
+        for (var i=1; i <= 9; i++) {                // go thru this loop 2x, when h=0 and h=9.
+            if (theme === "pokemon") {
+                if (i === 3 || i === 4) {
+                    card = "images/pkmn_" + i + ".png";
+                } else {
+                    card = "images/pkmn_" + i + ".jpg";
+                }
+
+            } else {    // My Little Pony theme
+                if (i === 4) {
+                    card = "images/pony4b.png";     // pony4 is a png; all the rest are jpg
+                } else {
+                    card = "images/pony" + i + "b.jpg";
+                }
+            }
+
+            card_img = $("<img>",
+                {
+                    src:    card,
+                    alt:    "pony or pkmn" + i,
+                    class:  "card_front"
+                });
+            slot = "#slot" + randomized_array[i-1+h] + " .front";
+            $(slot).append(card_img);
+        }
+    }
+    $("img").width("90%").height("100%");
+}
+
+/* Called by "$(document).ready".  This function is called only once, since the card backs are never destroyed/removed. */
+function insertBackCards () {
+    var card_img;
+    var image_for_back_card;
+    var slot;
+
+    if (theme === "pokemon") {
+        image_for_back_card = "images/card_back_pkmn.png";
+    } else {
+        image_for_back_card = "images/card_back_ponyb.jpg";
+    }
+
+    for (var i=0; i <= 17; i++) {
+        slot = "#slot" + i + " .back";
+
+        card_img = $("<img>",
+            {
+                src:    image_for_back_card,
+                alt:    "back of card"
+            });
+
+        $(slot).append(card_img);
+    }
+    $("img").width("90%").height("100%");
+}
+
+/* Called by "insertFrontCards".  Takes an array (18 elements long) and returns an array of the same elements in random order. */
+function generateRandomCardSlots () {
+    var array_ordered = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+    var array_randomized = [];
+    var rndm_num1;
+
+    while (array_ordered.length > 0) {
+        rndm_num1 = Math.floor(Math.random() * 18);
+
+        for (var j=0; j < array_ordered.length; j++) {
+            if (rndm_num1 === array_ordered[j]) {
+                array_ordered.splice(j,1);          // remove element from original array if rndm_num matches that element
+                array_randomized.push(rndm_num1);
+            }
+        }
+    }
+    return array_randomized;
+}
+
+/* Called by "cardClicked".  Assuming there are 2 cards clicked and therefore opaque (card front is visible), makes the card back visible so card front is no longer visible to user. */
 function resetTwoCards () {
     $(first_card_clicked).toggleClass("make_opaque");
     $(second_card_clicked).toggleClass("make_opaque");
@@ -21,8 +127,10 @@ function resetTwoCards () {
     second_card_clicked = null;
 }
 
-function display_stats () {
+/* Called by multiple functions.  Generates or affects text in "stats" area (left_side div). */
+function displayStats () {
     $(".games_played .value").text(games_played);
+    $(".matches .value").text(match_counter);
     $(".attempts .value").text(attempts);
 
     var percent_accuracy = accuracy * 100;          // convert to a number betweeen 0 and 100
@@ -30,61 +138,161 @@ function display_stats () {
     $(".accuracy .value").text(percent_accuracy + "%");
 }
 
-function reset_stats () {
+/* Called by "resetClicked".  Resets to zero and then displays. */
+function resetStats () {
     accuracy = 0;
     match_counter = 0;
     attempts = 0;
-    display_stats();
+    displayStats();
 }
 
-function reset_clicked () {
-    if (match_counter === total_possible_matches) {
-        games_played++;  // only if player has completed game then player gets credit for a game played
-    }
+/* Called by "Lift Cards" button.  "Lifts" card backs for 1/2 second so users can see card fronts momentarily. */
+function liftClicked () {
+    var audio_oh_no = document.getElementById("ohNo");
+    audio_oh_no.play();
 
-    reset_stats();
-    $(".back").removeClass("make_opaque"); // card backs are put back in place by making them visible again
-    $('#game_area h3').remove(); // removes h3 element containing "You have won! Word to the mother!"
+    $(".back").toggleClass("make_opaque");
+    setTimeout(function() {$(".back").toggleClass("make_opaque")}, 500);
 }
 
-function card_clicked () {
-    $(this).toggleClass("make_opaque");
+/* Called by: "Reset button".  Removes vestiges of old game and sets up for new game. */
+function resetClicked () {
+    var audioCardShuffle = document.getElementById("cardShuffle");
+    audioCardShuffle.play();
+    resetStats();
 
-    if (first_card_clicked === null) {
-        first_card_clicked = this;
-    }
-    else {
-        second_card_clicked = this;
+    $('#game_area h3').remove();            // remove h3 element with winning phrase
+    $(".card_front").remove();              // remove the old card front elements
+    insertFrontCards();
+    $(".back").removeClass("make_opaque").removeClass("little_opaque").removeClass("matched");  // card backs are put back in place by making them visible again
+    $(".reset").click(resetClicked);       // Call function resetClicked when clicking on the reset button
+}
 
-        attempts++;
-        accuracy = match_counter / attempts;
-        display_stats();
+/* Called by: "cardClicked".  Plays sound clip and flips over the 1 card that was clicked on. */
+function flipCard (card_back) {
+    var audio_card_flip = document.getElementById("cardFlip");
+    audio_card_flip.play();
 
-        var first_img = $(first_card_clicked).parent().children(".front").find("img").attr('src');
-        var second_img = $(second_card_clicked).parent().children(".front").find("img").attr('src');
-        // console.log("attempts: ", attempts);
+    $(card_back).toggleClass("make_opaque");
+}
 
-        if (first_img == second_img) {
-            match_counter++;
-            accuracy = match_counter / attempts;
-            display_stats();
+/* Called by: "cardClicked".  Removes old phrase, if any, and displays phrase "Choose an unflipped card" in a random color. */
+function cardAlreadyFlipped () {
+    var rndm_num2;
+    var phrase_color;
+    var colorArray = ["purple", "deeppink", "blue", "darkblue", "magenta", "hotpink", "darkmagenta", "green", "darkgreen"];
 
-            first_card_clicked = null;
-            second_card_clicked = null;
-            // console.log("match counter is: ", match_counter);
+    $('#game_area h3').remove();
 
-            if (match_counter === total_possible_matches) {
-                $('#game_area').append("<h3>You have won!  Word to the mother!</h3>");
-            }
-            else {
-                return;
-            } // end of 3rd if block
+    rndm_num2 = Math.floor(Math.random() * 9);
+    phrase_color = colorArray[rndm_num2];
+
+    $('#game_area').append("<h3>Choose an unflipped card </h3>");
+    $('#game_area h3').css("color", phrase_color).css("background-color", "white").css("border", "3px solid lightpink").css("border-radius", "1em");
+}
+
+/* If 1st card clicked, then simply shows card front.  If 2nd card clicked, then checks to see if there is a match with the 1st card. */
+function cardClicked () {
+    var audio_yeah;
+    var audio_success;
+
+    var first_img;
+    var second_img;
+
+    var rndm_num3;
+    var phrase;
+    var phrase_element;
+    var winning_phrases_array_pokemon =
+        [
+            "You have won!  Word to the mother!",
+            "Squirtle says you're the best!",
+            "Congratulations!  Pikachu's coming to high-five you!",
+            "You finished!  Ivysaur will now eat you!",
+            "Oh Yeah...Bulbasaur is proud of you!"
+        ];
+    var winning_phrases_array_pony =
+        [
+            "You've won!  Fluttershy can sparkle!",
+            "Great!  Pinkie Pie will get a perm for her mane!",
+            "Well done, Rainbow Dash is showing her true colors!",
+            "You got them all...Princess Luna is proud of you!",
+            "Well played...Twilight Sparkle can fly again!"
+        ];
+
+    if ($(this).hasClass("matched")) {
+        cardAlreadyFlipped();
+
+    } else {
+        if (first_card_clicked === null) {
+            first_card_clicked = this;
+            flipCard(this);
+            $('#game_area h3').remove();
         }
-        else {
-            setTimeout(resetTwoCards, 1500);
-            return;
-        } // end of 2nd if block
+        else if (second_card_clicked === null) {
+            second_card_clicked = this;
+            if (first_card_clicked === second_card_clicked) {
+                cardAlreadyFlipped();
+                second_card_clicked = null;
 
-    } // end of 1st if block
+            } else {
+                $('#game_area h3').remove();
+                flipCard(this);
 
-} // end of function card_clicked
+                attempts++;
+                accuracy = match_counter / attempts;
+                displayStats();
+
+                first_img = $(first_card_clicked).parent().children(".front").find("img").attr('src');
+                second_img = $(second_card_clicked).parent().children(".front").find("img").attr('src');
+
+                if (first_img === second_img) {                     // if legitimate match
+                    audio_yeah = document.getElementById("yeah");
+                    audio_yeah.play();
+
+                    $(first_card_clicked).addClass("matched").addClass("little_opaque");
+                    $(second_card_clicked).addClass("matched").addClass("little_opaque");
+
+                    match_counter++;
+                    accuracy = match_counter / attempts;
+                    displayStats();
+
+                    first_card_clicked = null;
+                    second_card_clicked = null;
+
+                    if (match_counter === total_possible_matches) {
+                        audio_success = document.getElementById("success");
+                        audio_success.play();
+
+                        rndm_num3 = Math.floor(Math.random() * 5);
+                        if (theme === "pokemon") {
+                            phrase = winning_phrases_array_pokemon[rndm_num3];
+                        } else {
+                            phrase = winning_phrases_array_pony[rndm_num3];
+                        }
+
+                        phrase_element = $("<h3>",
+                            {
+                                text:   phrase
+                            });
+                        $('#game_area').append(phrase_element);
+                        // $('#game_area h3').css("color", "purple");
+
+                        if (theme === "pokemon") {
+                            $('#game_area h3').css("font-family", "pokeFont").css("color", "yellow");
+                        } else {
+                            $('#game_area h3').css("font-family", "kinkie").css("color", "rebeccapurple");
+                        }
+                        $('#game_area h3').css("background-color", "white").css("border", "3px solid lightpink").css("border-radius", "1em");
+                        games_played++;
+                    }
+                }
+                else {
+                    setTimeout(resetTwoCards, 1500);
+                }
+            }
+        }
+        else {  // This handles the case where you click on more than 2 cards; i.e., doesn't do anything
+            // console.log("2 cards have already been clicked");
+        }
+    }
+}

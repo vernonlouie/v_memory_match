@@ -1,266 +1,154 @@
-<!--    Memory Match project v1.0    Vernon Louie    C11.16      November 18, 2016   -->
+<!--    Vernon Louie    March 2017   -->
 
 <!doctype html>
 <html>
-
     <head>
-        <title> mem match </title>
-
-        <!-- link to external sources -->
-        <script src="https://code.jquery.com/jquery-2.1.4.min.js"</script>
-        <script src="http://learning-fuze.github.io/memory_match/v0.1/script.js"</script>
-        <!-- Enter the Bootstrap CDN address into the link below -->
+        <title> card match </title>
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-
-        // link to internal resources -->
-        <link rel="stylesheet" href="style2.css">
+        <link rel="stylesheet" href="style.css">
         <script src="js_for_mem_match.js"></script>
     </head>
 
     <body>
         <header>
-            <div class = "logo1">
-                <img src = "images/icon1.png" alt="abstract symbol" width="70" />
+            <div class = "title">
+                <h2>Card Match</h2>
             </div>
 
-            <div class = "title"> My Little Pony Card Match </div>
-
-            <div class = "settings">
-                <a href="https://sfgate.com/giants" target="_blank"> Settings </a>
-            </div>
-
-            <div class = "about">
-                <a href="index1.html" target="_blank"> About </a>
-            </div>
+            <!--<div class = "settings">-->
+                <!--<form action = "something.php">-->
+                    <!--<p>If you wish, change theme:-->
+                        <!--<br />-->
+                        <!--<input type="radio" name="theme" value="My Little Pony">My Little Pony-->
+                        <!--<input type="radio" name="theme" value="My Little Pony">Star Wars-->
+                        <!--<input type="radio" name="theme" value="My Little Pony">Pokemon-->
+                        <!--<input type="submit" value="Submit" class="change_theme" />-->
+                    <!--</p>-->
+                <!--</form>-->
+            <!--</div>-->
         </header>
 
-        <div class = "bottom_container"> <!-- contains both "left side" and "game area" divs -->
-
-            <div class = "left_side"> <b>Stats</b>
+        <div class = "bottom_container">                <!-- contains both "left side" and "game area" divs -->
+            <div class = "left_side col-xs-12 col-sm-1"> <h3>Stats</h3>
                 <div class = "first_top games_played">
-                    <h2 class = "label">
-                        Games Played:
-                    </h2>
-                    <p class = "value">
-                        0
-                    </p>
+                    <h2 class = "label"> Games Played: </h2>
+                    <p class = "value"> 0 </p>
+                </div>
+
+                <div class = "first_top matches">
+                    <h2 class = "label"> Matches: </h2>
+                    <p class = "value"> 0 </p>
                 </div>
 
                 <div class = "first_top attempts">
-                    <h2 class = "label">
-                        Attempts:
-                    </h2>
-                    <p class = "value">
-                       0
-                    </p>
+                    <h2 class = "label"> Attempts: </h2>
+                    <p class = "value"> 0 </p>
                 </div>
 
                 <div class = "first_top accuracy">
-                    <h2 class = "label">
-                        Accuracy:
-                    </h2>
-                    <p class = "value">
-                        0%
-                    </p>
+                    <h2 class = "label"> Accuracy: </h2>
+                    <p class = "value"> 0% </p>
                 </div>
 
-                <div class = "first_top">
+                <div>
+                    <button type="button" class="btn btn-default lift" data-dismiss="modal"> Lift Cards </button>
+                </div>
+
+                <div>
                     <button type="button" class="btn btn-default reset" data-dismiss="modal"> Reset Game </button>
                 </div>
             </div>
 <!-- end of left side bar -->
 
-            <div id = "game_area">
-
+            <div id = "game_area" class = "col-xs-12 col-sm-8 pull right">
                 <div class="card_row">                          <!-- 1st card row -->
-                    <div class="col-xs-2 card">                     <!-- card 1 -->
-                        <div class = "front">
-                            <img src="images/DV1_dune1.jpg" alt="death valley sand dune image 1" width="100">
-                        </div>
-
-                        <div class = "back">
-                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
-                        </div>
+                    <div class="col-xs-2 card" id = "slot1">                     <!-- card 1 -->
+                        <div class = "front"> </div>
+                        <div class = "back"> </div>
                     </div>
-                    <div class="col-xs-2 card">                     <!-- card 2 -->
-                        <div class = "front">
-                            <img src="images/DV1_dune1.jpg" alt="death valley sand dune image 1" width="100">
-                        </div>
-
-                        <div class = "back">
-                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
-                        </div>
+                    <div class="col-xs-2 card" id = "slot2">                     <!-- card 2 -->
+                        <div class = "front"> </div>
+                        <div class = "back"> </div>
                     </div>
-                    <div class="col-xs-2 card">                     <!-- card 3 -->
-                        <div class = "front">
-                            <img src="images/DV4_dune4.jpg" alt="death valley sand dune image 4" width="100">
-                        </div>
-
-                        <div class = "back">
-                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
-                        </div>
+                    <div class="col-xs-2 card" id = "slot3">                     <!-- card 3 -->
+                        <div class = "front"> </div>
+                        <div class = "back"> </div>
                     </div>
-                    <div class="col-xs-2 card">                     <!-- card 4 -->
-                        <div class = "front">
-                            <img src="images/DV4_dune4.jpg" alt="death valley sand dune image 4" width="100">
-                        </div>
-
-                        <div class = "back">
-                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
-                        </div>
+                    <div class="col-xs-2 card" id = "slot4">                     <!-- card 4 -->
+                        <div class = "front"> </div>
+                        <div class = "back"> </div>
                     </div>
-                </div>
-                    <!-- make 4-card static layout
-
-                    <div class="col-xs-2 card">
-                        <div class = "front">
-                            <img src="images/DV5_dune5.jpg" alt="death valley sand dune image 5" width="100">
-                        </div>
-
-                        <div class = "back">
-                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
-                        </div>
+                    <div class="col-xs-2 card" id = "slot5">                     <!-- card 5 -->
+                        <div class = "front"> </div>
+                        <div class = "back"> </div>
                     </div>
-                    <div class="col-xs-2 card">
-                        <div class = "front">
-                            <img src="images/DV6_dune6.jpg" alt="death valley sand dune image 6" width="100">
-                        </div>
-
-                        <div class = "back">
-                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
-                        </div>
+                    <div class="col-xs-2 card" id = "slot6">                     <!-- card 6 -->
+                        <div class = "front"> </div>
+                        <div class = "back"> </div>
                     </div>
-                </div>
+                </div>                                          <!-- end of 1st card row -->
 
-                <div class="card_row">
-                    <div class="col-xs-2 card">
-                        <div class = "front">
-                            <img src="images/DV7_mason_sleeping.jpg" alt="mason sleeping image" width="100">
-                        </div>
-
-                        <div class = "back">
-                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
-                        </div>
+                <div class="card_row">                          <!-- 2nd card row -->
+                    <div class="col-xs-2 card" id = "slot7">
+                        <div class = "front"> </div>
+                        <div class = "back"> </div>
                     </div>
-                    <div class="col-xs-2 card">
-                        <div class = "front">
-                            <img src="images/DV8_mosaic.jpg" alt="mosaic canyon image" width="100">
-                        </div>
-
-                        <div class = "back">
-                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
-                        </div>
+                    <div class="col-xs-2 card" id = "slot8">
+                        <div class = "front"> </div>
+                        <div class = "back"> </div>
                     </div>
-                    <div class="col-xs-2 card">
-                        <div class = "front">
-                            <img src="images/DV9_Mason_mosaic.jpg" alt="mason sliding image" width="100">
-                        </div>
-
-                        <div class = "back">
-                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
-                        </div>
+                    <div class="col-xs-2 card" id = "slot9">
+                        <div class = "front"> </div>
+                        <div class = "back"> </div>
                     </div>
-                    <div class="col-xs-2 card">
-                        <div class = "front">
-                            <img src="images/DV1_dune1.jpg" alt="death valley sand dune image 1" width="100">
-                        </div>
-
-                        <div class = "back">
-                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
-                        </div>
+                    <div class="col-xs-2 card" id = "slot10">
+                        <div class = "front"> </div>
+                        <div class = "back"> </div>
                     </div>
-                    <div class="col-xs-2 card">
-                        <div class = "front">
-                            <img src="images/DV2_dune2.jpg" alt="death valley sand dune image 2" width="100">
-                        </div>
-
-                        <div class = "back">
-                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
-                        </div>
+                    <div class="col-xs-2 card" id = "slot11">
+                        <div class = "front"> </div>
+                        <div class = "back"> </div>
                     </div>
-                    <div class="col-xs-2 card">
-                        <div class = "front">
-                            <img src="images/DV3_dune3.jpg" alt="death valley sand dune image 3" width="100">
-                        </div>
-
-                        <div class = "back">
-                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
-                        </div>
+                    <div class="col-xs-2 card" id = "slot12">
+                        <div class = "front"> </div>
+                        <div class = "back"> </div>
                     </div>
-                </div>
+                </div>                                          <!-- end of 2nd card row -->
 
-                <div class="card_row">
-                    <div class="col-xs-2 card">
-                        <div class = "front">
-                            <img src="images/DV4_dune4.jpg" alt="death valley sand dune image 4" width="100">
-                        </div>
-
-                        <div class = "back">
-                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
-                        </div>
+                <div class="card_row">                          <!-- 3rd card row -->
+                    <div class="col-xs-2 card" id = "slot13">
+                        <div class = "front"> </div>
+                        <div class = "back"> </div>
                     </div>
-                    <div class="col-xs-2 card">
-                        <div class = "front">
-                            <img src="images/DV5_dune5.jpg" alt="death valley sand dune image 5" width="100">
-                        </div>
-
-                        <div class = "back">
-                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
-                        </div>
+                    <div class="col-xs-2 card" id = "slot14">
+                        <div class = "front"> </div>
+                        <div class = "back"> </div>
                     </div>
-                    <div class="col-xs-2 card">
-                        <div class = "front">
-                            <img src="images/DV6_dune6.jpg" alt="death valley sand dune image 6" width="100">
-                        </div>
-
-                        <div class = "back">
-                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
-                        </div>
+                    <div class="col-xs-2 card" id = "slot15">
+                        <div class = "front"> </div>
+                        <div class = "back"> </div>
                     </div>
-                    <div class="col-xs-2 card">
-                        <div class = "front">
-                            <img src="images/DV7_mason_sleeping.jpg" alt="mason sleeping image" width="100">
-                        </div>
-
-                        <div class = "back">
-                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
-                        </div>
+                    <div class="col-xs-2 card" id = "slot16">
+                        <div class = "front"> </div>
+                        <div class = "back"> </div>
                     </div>
-                    <div class="col-xs-2 card">
-                        <div class = "front">
-                            <img src="images/DV8_mosaic.jpg" alt="mosaic canyon image" width="100">
-                        </div>
-
-                        <div class = "back">
-                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
-                        </div>
+                    <div class="col-xs-2 card" id = "slot17">
+                        <div class = "front"> </div>
+                        <div class = "back"> </div>
                     </div>
-                    <div class="col-xs-2 card">
-                        <div class = "front">
-                            <img src="images/DV9_Mason_mosaic.jpg" alt="mason sliding image" width="100">
-                        </div>
-
-                        <div class = "back">
-                            <img src="images/15541-illustration-of-a-card-deck-back-pv.png" alt="back of card" width="95">
-                        </div>
-                    </div> end of 18th card
-                 </div>
-
-            -->
-
+                    <div class="col-xs-2 card" id = "slot0">
+                        <div class = "front"> </div>
+                        <div class = "back"> </div>
+                    </div> <!-- end of 18th card -->
+                 </div>                                         <!-- end of 3rd card row -->
             </div> <!-- end of game area div -->
-
         </div> <!-- end of bottom container div, which contains "left side" and "game area" -->
 
+        <audio id = "cardFlip" src="audio_clips/240776__f4ngy__card-flip.wav"> <p>This browser doesn't support audio format.</p> </audio>
+        <audio id = "yeah" src="audio_clips/19446__totya__yeah.mp3"> <p>This browser doesn't support audio format.</p> </audio>
+        <audio id = "success" src="audio_clips/320653__rhodesmas__success-01.wav"> <p>This browser doesn't support audio format.</p> </audio>
+        <audio id = "ohNo" src="audio_clips/131406__ecfike__oh-no-1.wav"> <p>This browser doesn't support audio format.</p> </audio>
+        <audio id = "cardShuffle" src="audio_clips/256508__kodack__riffle-card-shuffle.wav"> <p>Browser doesn't support audio format.</p> </audio>
     </body>
-
-    <!-- end of 3rd card row -->
-    <!-- card 6 -->
-    <!-- card 5 -->
-    <!-- end of 1st card row -->
-    <!-- 2nd card row -->
-    <!-- 3rd card row -->
-    <!-- end of 2nd card row -->
-
-    <!-- end of last card div, 18th card -->
 </html>
