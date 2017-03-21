@@ -4,7 +4,7 @@ var theme = "pokemon";
 var first_card_clicked = null;
 var second_card_clicked = null;
 
-var total_possible_matches = 2;         // win condition
+var total_possible_matches = 9;         // win condition
 var match_counter = 0;
 var attempts = 0;
 var accuracy = 0;
