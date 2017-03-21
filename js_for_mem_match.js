@@ -1,10 +1,10 @@
 /*  Vernon Louie     March 2017     */
 
-var theme = "pokemon";
+var theme = "pokemo";
 var first_card_clicked = null;
 var second_card_clicked = null;
 
-var total_possible_matches = 9;         // win condition
+var total_possible_matches = 2;         // win condition
 var match_counter = 0;
 var attempts = 0;
 var accuracy = 0;
@@ -164,7 +164,7 @@ function resetClicked () {
     $('#game_area h3').remove();            // remove h3 element with winning phrase
     $(".card_front").remove();              // remove the old card front elements
     insertFrontCards();
-    $(".back").removeClass("make_opaque").removeClass("matched");  // card backs are put back in place by making them visible again
+    $(".back").removeClass("make_opaque").removeClass("little_opaque").removeClass("matched");  // card backs are put back in place by making them visible again
     $(".reset").click(resetClicked);       // Call function resetClicked when clicking on the reset button
 }
 
@@ -186,8 +186,9 @@ function cardAlreadyFlipped () {
 
     rndm_num2 = Math.floor(Math.random() * 9);
     phrase_color = colorArray[rndm_num2];
-    $('#game_area').append("<h3> Choose an unflipped card </h3>");
-    $('#game_area h3').css("color", phrase_color);
+
+    $('#game_area').append("<h3>Choose an unflipped card </h3>");
+    $('#game_area h3').css("color", phrase_color).css("background-color", "white").css("border", "3px solid lightpink").css("border-radius", "1em");
 }
 
 /* If 1st card clicked, then simply shows card front.  If 2nd card clicked, then checks to see if there is a match with the 1st card. */
@@ -248,8 +249,8 @@ function cardClicked () {
                     audio_yeah = document.getElementById("yeah");
                     audio_yeah.play();
 
-                    $(first_card_clicked).addClass("matched");
-                    $(second_card_clicked).addClass("matched");
+                    $(first_card_clicked).addClass("matched").addClass("little_opaque");
+                    $(second_card_clicked).addClass("matched").addClass("little_opaque");
 
                     match_counter++;
                     accuracy = match_counter / attempts;
@@ -281,7 +282,7 @@ function cardClicked () {
                         } else {
                             $('#game_area h3').css("font-family", "kinkie").css("color", "rebeccapurple");
                         }
-
+                        $('#game_area h3').css("background-color", "white").css("border", "3px solid lightpink").css("border-radius", "1em");
                         games_played++;
                     }
                 }
