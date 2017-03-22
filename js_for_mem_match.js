@@ -24,7 +24,6 @@ $(document).ready(function () {
     $(".lift").click(liftClicked);     // "Lift Cards" button
     $(".back").click(cardClicked);     // card back
     $(".reset").click(resetClicked);   // "Reset Game" button
-
 });
 
 function insertTitle () {
@@ -188,7 +187,8 @@ function cardAlreadyFlipped () {
     phrase_color = colorArray[rndm_num2];
 
     $('#game_area').append("<h3>Choose an unflipped card </h3>");
-    $('#game_area h3').css("color", phrase_color).css("background-color", "white").css("border", "3px solid lightpink").css("border-radius", "1em");
+    $('#game_area h3').css("color", phrase_color).css("background-color", "white").css("border", "3px solid lightpink").css("border-radius", "1em").css("position", "relative").css("bottom", "0.8em").css("width", "70%").css("margin", "auto");
+
     // $('.bottom_stats').css("position", "relative").css("top", "2.5em");
 }
 
@@ -279,11 +279,11 @@ function cardClicked () {
                         // $('#game_area h3').css("color", "purple");
 
                         if (theme === "pokemon") {
-                            $('#game_area h3').css("font-family", "pokeFont").css("color", "yellow");
+                            $('#game_area h3').css("font-family", "pokeFont").css("color", "darkorange");
                         } else {
                             $('#game_area h3').css("font-family", "kinkie").css("color", "rebeccapurple");
                         }
-                        $('#game_area h3').css("background-color", "white").css("border", "3px solid lightpink").css("border-radius", "1em");
+                        $('#game_area h3').css("background-color", "white").css("border", "3px solid lightpink").css("border-radius", "1em").css("position", "relative").css("bottom", "0.8em").css("margin", "auto");
 
                     }
                 }

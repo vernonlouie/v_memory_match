@@ -55,6 +55,7 @@ header {
     border-radius:  3em;
     /*border:         1px black dotted;*/
     margin:         auto;
+    margin-right:   1em;
 }
 
 /* left side bar within bottom container and its elements */
@@ -159,19 +160,25 @@ header {
         opacity:    0.3;
     }
 
-    .full_opaque {
-        opacity:    1;
-    }
-
     img {
         border: 4px purple solid;
     }
+
+    /*.game_area h3 {*/
+        /*background-color:   white;*/
+        /*border:             3px solid lightpink;*/
+        /*border-radius:      1em;*/
+        /*position:           relative;*/
+        /*bottom:             2em;*/
+    /*}*/
 
 .bottom_stats {
     margin:     auto;
     /*border:     2px dotted black;*/
     width:      85%;
     text-align: center;
+    position:   relative;
+    bottom:     5em;
 }
 
 .bottom_stats .first_top {
