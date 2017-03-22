@@ -30,7 +30,7 @@
         </header>
 
         <div class = "bottom_container">                <!-- contains both "left side" and "game area" divs -->
-            <div class = "left_side col-xs-12 col-sm-1"> <h3>Stats</h3>
+            <div class = "left_side hidden-xs hidden-sm"> <h3>Stats</h3>
                 <div class = "first_top games_played">
                     <h2 class = "label"> Games Played: </h2>
                     <p class = "value"> 0 </p>
@@ -61,7 +61,7 @@
             </div>
 <!-- end of left side bar -->
 
-            <div id = "game_area" class = "col-xs-12 col-sm-8 pull right">
+            <div id = "game_area">
                 <div class="card_row">                          <!-- 1st card row -->
                     <div class="col-xs-2 card" id = "slot1">                     <!-- card 1 -->
                         <div class = "front"> </div>
@@ -144,6 +144,37 @@
                  </div>                                         <!-- end of 3rd card row -->
             </div> <!-- end of game area div -->
         </div> <!-- end of bottom container div, which contains "left side" and "game area" -->
+
+        <div class = "bottom_stats hidden-md hidden-lg"> <h3>Stats</h3>
+            <div class = "first_top games_played">
+                <h2 class = "label"> Games Played: </h2>
+                <p class = "value"> 0 </p>
+            </div>
+
+            <div class = "first_top matches">
+                <h2 class = "label"> Matches: </h2>
+                <p class = "value"> 0 </p>
+            </div>
+
+            <div class = "first_top attempts">
+                <h2 class = "label"> Attempts: </h2>
+                <p class = "value"> 0 </p>
+            </div>
+
+            <div class = "first_top accuracy">
+                <h2 class = "label"> Accuracy: </h2>
+                <p class = "value"> 0% </p>
+            </div>
+
+
+            <div class = "bottom_buttons">
+                <button type="button" class="btn btn-default lift" data-dismiss="modal"> Lift Cards </button>
+                <button type="button" class="btn btn-default reset" data-dismiss="modal"> Reset Game </button>
+            </div>
+
+            <div>
+
+            </div>
 
         <audio id = "cardFlip" src="audio_clips/240776__f4ngy__card-flip.wav"> <p>This browser doesn't support audio format.</p> </audio>
         <audio id = "yeah" src="audio_clips/19446__totya__yeah.mp3"> <p>This browser doesn't support audio format.</p> </audio>

@@ -60,7 +60,7 @@ header {
 /* left side bar within bottom container and its elements */
 .left_side {
     height:         70vh;
-    width:          20%;
+    width:          18%;
     text-align:     center;
     border-radius:  2em;
     display:        inline-block;
@@ -102,34 +102,36 @@ header {
         border: 4px pink solid;
     }
 
-    .lift {
+    .left_side .lift {
         margin: 2em 0 0.5em 0;
-        background-color:   mediumpurple;
-        border: 4px pink solid;
+    }
+
+    .lift {
+    background-color:   mediumpurple;
+    border: 4px pink solid;
     }
 
 /* game area and its elements within bottom container */
 #game_area {
-    height:             80vh;
-    width:              70%;
-    text-align:         center;
-    border-radius:      0.5em;
-    /*border:             1px blue solid;*/
-    font-family:    "kinkie";
+    height:         80vh;
+    width:          79%;
+    text-align:     center;
+    border-radius:  0.5em;
+    /*border:       1px blue solid;*/
+    font-family:    "kinkie", Verdana, Arial;
     color:          purple;
-    margin:             auto;
-    display:            inline-block;
+    margin:         auto;
+    display:        inline-block;
 }
 
     .card_row {
      /*   border:             0.1em dotted black; */
         height:             30%;
-        margin:             1.5em;
     }
 
     .card {
      /*   border:             0.1em dashed brown; */
-        height:             99%;
+        height:             80%;
     }
 
     img:hover {
@@ -165,4 +167,23 @@ header {
         border: 4px purple solid;
     }
 
+.bottom_stats {
+    margin:     auto;
+    /*border:     2px dotted black;*/
+    width:      85%;
+    text-align: center;
+}
+
+.bottom_stats .first_top {
+    width:  23%;
+    display:    inline-block;
+}
+
+.bottom_buttons {
+    margin: 1em 0 1em 0;
+}
+
+.bottom_stats button {
+    margin-left:   1em;
+}
 

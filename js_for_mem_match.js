@@ -1,6 +1,6 @@
 /*  Vernon Louie     March 2017     */
 
-var theme = "pokemon";
+var theme = "pokemo";
 var first_card_clicked = null;
 var second_card_clicked = null;
 
@@ -159,13 +159,13 @@ function liftClicked () {
 function resetClicked () {
     var audioCardShuffle = document.getElementById("cardShuffle");
     audioCardShuffle.play();
+    games_played++;
     resetStats();
 
     $('#game_area h3').remove();            // remove h3 element with winning phrase
     $(".card_front").remove();              // remove the old card front elements
     insertFrontCards();
     $(".back").removeClass("make_opaque").removeClass("little_opaque").removeClass("matched");  // card backs are put back in place by making them visible again
-    $(".reset").click(resetClicked);       // Call function resetClicked when clicking on the reset button
 }
 
 /* Called by: "cardClicked".  Plays sound clip and flips over the 1 card that was clicked on. */
@@ -189,6 +189,7 @@ function cardAlreadyFlipped () {
 
     $('#game_area').append("<h3>Choose an unflipped card </h3>");
     $('#game_area h3').css("color", phrase_color).css("background-color", "white").css("border", "3px solid lightpink").css("border-radius", "1em");
+    // $('.bottom_stats').css("position", "relative").css("top", "2.5em");
 }
 
 /* If 1st card clicked, then simply shows card front.  If 2nd card clicked, then checks to see if there is a match with the 1st card. */
@@ -283,7 +284,7 @@ function cardClicked () {
                             $('#game_area h3').css("font-family", "kinkie").css("color", "rebeccapurple");
                         }
                         $('#game_area h3').css("background-color", "white").css("border", "3px solid lightpink").css("border-radius", "1em");
-                        games_played++;
+
                     }
                 }
                 else {
