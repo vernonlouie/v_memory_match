@@ -1,10 +1,10 @@
 /*  Vernon Louie     March 2017     */
 
-var theme = "pokemo";
+var theme = "pokemon";
 var first_card_clicked = null;
 var second_card_clicked = null;
 
-var total_possible_matches = 2;         // win condition
+var total_possible_matches = 9;         // win condition
 var match_counter = 0;
 var attempts = 0;
 var accuracy = 0;
@@ -16,9 +16,9 @@ $(document).ready(function () {
     insertBackCards();
 
     if (theme === "pokemon") {
-        $('body').css("background", "url(images/background_pkmn.jpg) no-repeat center center fixed");
+        $('body').css("background-image", "url(images/background_pkmn.jpg)" );
     } else {
-        $('body').css("background", "url(images/background_pony.jpg) no-repeat center center fixed");
+        $('body').css("background-image", "url(images/background_pony.jpg)" );
     }
 
     $(".lift").click(liftClicked);     // "Lift Cards" button
