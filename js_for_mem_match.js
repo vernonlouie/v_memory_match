@@ -4,7 +4,7 @@ var theme = "pokemo";
 var first_card_clicked = null;
 var second_card_clicked = null;
 
-var total_possible_matches = 9;         // win condition
+var total_possible_matches = 2;         // win condition
 var match_counter = 0;
 var attempts = 0;
 var accuracy = 0;
@@ -156,8 +156,8 @@ function liftClicked () {
 
 /* Called by: "Reset button".  Removes vestiges of old game and sets up for new game. */
 function resetClicked () {
-    var audioCardShuffle = document.getElementById("cardShuffle");
-    audioCardShuffle.play();
+    var audio_card_shuffle = document.getElementById("cardShuffle");
+    audio_card_shuffle.play();
     games_played++;
     resetStats();
 
@@ -181,6 +181,9 @@ function cardAlreadyFlipped () {
     var phrase_color;
     var colorArray = ["purple", "deeppink", "blue", "darkblue", "magenta", "hotpink", "darkmagenta", "green", "darkgreen"];
 
+    var audio_card_already_picked = document.getElementById("whatAreYouDoing");
+    audio_card_already_picked.play();
+
     $('#game_area h3').remove();
 
     rndm_num2 = Math.floor(Math.random() * 9);
@@ -195,30 +198,8 @@ function cardAlreadyFlipped () {
 /* If 1st card clicked, then simply shows card front.  If 2nd card clicked, then checks to see if there is a match with the 1st card. */
 function cardClicked () {
     var audio_yeah;
-    var audio_success;
-
     var first_img;
     var second_img;
-
-    var rndm_num3;
-    var phrase;
-    var phrase_element;
-    var winning_phrases_array_pokemon =
-        [
-            "You have won!  Word to the mother!",
-            "Squirtle says you're the best!",
-            "Congratulations!  Pikachu's coming to high-five you!",
-            "You finished!  Ivysaur will now eat you!",
-            "Oh Yeah...Bulbasaur is proud of you!"
-        ];
-    var winning_phrases_array_pony =
-        [
-            "You've won!  Fluttershy can sparkle!",
-            "Great!  Pinkie Pie will get a perm for her mane!",
-            "Well done, Rainbow Dash is showing her true colors!",
-            "You got them all...Princess Luna is proud of you!",
-            "Well played...Twilight Sparkle can fly again!"
-        ];
 
     if ($(this).hasClass("matched")) {
         cardAlreadyFlipped();
@@ -261,30 +242,7 @@ function cardClicked () {
                     second_card_clicked = null;
 
                     if (match_counter === total_possible_matches) {
-                        audio_success = document.getElementById("success");
-                        audio_success.play();
-
-                        rndm_num3 = Math.floor(Math.random() * 5);
-                        if (theme === "pokemon") {
-                            phrase = winning_phrases_array_pokemon[rndm_num3];
-                        } else {
-                            phrase = winning_phrases_array_pony[rndm_num3];
-                        }
-
-                        phrase_element = $("<h3>",
-                            {
-                                text:   phrase
-                            });
-                        $('#game_area').append(phrase_element);
-                        // $('#game_area h3').css("color", "purple");
-
-                        if (theme === "pokemon") {
-                            $('#game_area h3').css("font-family", "pokeFont").css("color", "darkorange");
-                        } else {
-                            $('#game_area h3').css("font-family", "kinkie").css("color", "rebeccapurple");
-                        }
-                        $('#game_area h3').css("background-color", "white").css("border", "3px solid lightpink").css("border-radius", "1em").css("position", "relative").css("bottom", "0.8em").css("margin", "auto");
-
+                        gameWon();
                     }
                 }
                 else {
@@ -292,8 +250,96 @@ function cardClicked () {
                 }
             }
         }
-        else {  // This handles the case where you click on more than 2 cards; i.e., doesn't do anything
-            // console.log("2 cards have already been clicked");
+        else {
+            // This handles the case where you click on more than 2 cards; i.e., doesn't do anything
         }
     }
+}
+
+function gameWon () {
+    var rndm_num3;
+    var rndm_num4;
+    var rndm_num5;
+
+    var fireworks_gif;
+    var fw_gif;
+    var fw_sound_clip;
+
+    var phrase;
+    var phrase_element;
+
+    var audio_firework;
+
+    var winning_phrases_array_pokemon =
+        [
+            "You have won!  Word to the mother!",
+            "Squirtle says you're the best!",
+            "Congratulations!  Pikachu's coming to high-five you!",
+            "You finished!  Ivysaur will now eat you!",
+            "Oh Yeah...Bulbasaur is proud of you!"
+        ];
+    var winning_phrases_array_pony =
+        [
+            "You've won!  Fluttershy can sparkle!",
+            "Great!  Pinkie Pie will get a perm for her mane!",
+            "Well done, Rainbow Dash is showing her true colors!",
+            "You got them all...Princess Luna is proud of you!",
+            "Well played...Twilight Sparkle can fly again!"
+        ];
+
+    $(".back").removeClass("little_opaque").addClass("make_opaque");    // reveal all card fronts
+
+    rndm_num3 = Math.floor(Math.random() * 2);
+    if (rndm_num3 === 1) {
+        fw_gif = "images/fireworks-animated-gif-40-2.gif"
+    } else {
+        fw_gif = "images/fireworks-animated-gif-21-2.gif"
+    }
+
+    fireworks_gif = $("<img>",
+        {
+            src:    fw_gif,
+            alt:    "fireworks gif",
+            class:  "w3-animate-zoom",
+            id:     "firework_img"
+        });
+
+    $("#game_area").append(fireworks_gif);
+
+    $('#firework_img').css("position", "relative").css("bottom", "43em").css("border", "3px solid lightpink").css("border-radius", "1em").css("margin", "auto");
+
+    rndm_num4 = Math.floor(Math.random() * 2);
+    if (rndm_num4 === 1) {
+        fw_sound_clip = "firework1"
+    } else {
+        fw_sound_clip = "firework2"
+    }
+
+    audio_firework = document.getElementById(fw_sound_clip);
+    audio_firework.play();
+
+    setTimeout(function() {
+        $("#firework_img").remove();
+    }, 5000);
+
+    rndm_num5 = Math.floor(Math.random() * 5);
+    if (theme === "pokemon") {
+        phrase = winning_phrases_array_pokemon[rndm_num5];
+    } else {
+        phrase = winning_phrases_array_pony[rndm_num5];
+    }
+
+    phrase_element = $("<h3>",
+        {
+            text:   phrase
+        });
+    $('#game_area').append(phrase_element);
+
+    if (theme === "pokemon") {
+        $('#game_area h3').css("font-family", "pokeFont").css("color", "darkorange");
+    } else {
+        $('#game_area h3').css("font-family", "kinkie").css("color", "rebeccapurple");
+    }
+    $('#game_area h3').css("background-color", "white").css("border", "3px solid lightpink").css("border-radius", "1em").css("position", "relative").css("bottom", "0.8em").css("margin", "auto");
+
 }
