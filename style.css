@@ -2,11 +2,19 @@
 
 body {
     font-family:                Verdana, Arial;
+}
+
+#image_background {
     -webkit-background-size:    cover;
     -moz-background-size:       cover;
     -o-background-size:         cover;
+    height:                     100%;
+    width:                      100%;
+    margin:                     0;
     background-size:            cover;
-    position:                   relative;
+    background-repeat:          no-repeat;
+    position:                   fixed;
+    z-index:                    -1
 }
 
 @font-face {
@@ -138,6 +146,7 @@ header {
 
     img:hover {
         border: 4px yellow solid;
+        cursor: pointer;
     }
 
     .front {
@@ -185,11 +194,5 @@ header {
 
 .bottom_stats button {
     margin-left:   1em;
-}
-
-@media only screen and (max-width: 600px) {
-    .bottom_stats {
-        bottom:    2em;
-    }
 }
 

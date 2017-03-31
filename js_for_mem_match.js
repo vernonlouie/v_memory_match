@@ -4,7 +4,7 @@ var theme = "pokemo";
 var first_card_clicked = null;
 var second_card_clicked = null;
 
-var total_possible_matches = 1;         // win condition
+var total_possible_matches = 2;         // win condition
 var match_counter = 0;
 var attempts = 0;
 var accuracy = 0;
@@ -16,12 +16,13 @@ $(document).ready(function () {
     insertBackCards();
 
     if (theme === "pokemon") {
-        $('body').css("background-image", "url(images/background_pkmn.jpg)" );
+        $('#image_background').css("background-image", "url(images/background_pkmn.jpg)" );
     } else {
-        $('body').css("background-image", "url(images/background_pony.jpg)" );
+        $('#image_background').css("background-image", "url(images/background_pony.jpg)" );
     }
 
-    $(".lift").click(liftClicked);     // "Lift Cards" button
+    $(".lift").mousedown(liftDown);     // "Lift Cards" button
+    $(".lift").mouseup(liftUp);
     $(".back").click(cardClicked);     // card back
     $(".reset").click(resetClicked);   // "Reset Game" button
 });
@@ -148,13 +149,21 @@ function resetStats () {
     displayStats();
 }
 
-/* Called by "Lift Cards" button.  "Lifts" card backs for 1/2 second so users can see card fronts momentarily. */
-function liftClicked () {
-    var audio_oh_no = document.getElementById("ohNo");
-    audio_oh_no.play();
+/* Called by "Lift Cards" button.  "Lifts" card backs so users can see card fronts. */
+function liftDown () {
+    var audio_forgetIt = document.getElementById("forgetIt");
+    audio_forgetIt.play();
 
+    attempts++;
     $(".back").toggleClass("make_opaque");
-    setTimeout(function() {$(".back").toggleClass("make_opaque")}, 500);
+    displayStats();
+    // setTimeout(function() {$(".back").toggleClass("make_opaque")}, 5000);
+}
+
+function liftUp () {
+    attempts++;
+    $(".back").toggleClass("make_opaque");
+    displayStats();
 }
 
 /* Called by: "Reset button".  Removes vestiges of old game and sets up for new game. */
@@ -186,7 +195,7 @@ function cardAlreadyFlipped () {
     var phrase_color;
     var colorArray = ["purple", "deeppink", "blue", "darkblue", "magenta", "hotpink", "darkmagenta", "green", "darkgreen"];
 
-    var audio_card_already_picked = document.getElementById("whatAreYouDoing");
+    var audio_card_already_picked = document.getElementById("error");
     audio_card_already_picked.play();
 
     $('#game_area h3').remove();
@@ -197,7 +206,7 @@ function cardAlreadyFlipped () {
     $('#game_area').append("<h3>Choose an unflipped card </h3>");
     $('#game_area h3').css("color", phrase_color).css("background-color", "white").css("border", "3px solid lightpink").css("border-radius", "1em").css("position", "relative").css("bottom", "0.8em").css("width", "70%").css("margin", "auto");
 
-    $('.bottom_stats').css("position", "relative").css("bottom", "4em");
+    $('.bottom_stats').css("position", "relative").css("bottom", "2.5em");
 }
 
 /* If 1st card clicked, then simply shows card front.  If 2nd card clicked, then checks to see if there is a match with the 1st card. */
@@ -319,8 +328,6 @@ function gameWon () {
 
     $('#firework_img').css("position", "absolute").css("right", "20%").css("border", "3px solid lightpink").css("border-radius", "1em").css("width","50%").css("height", "50%").css("z-index", "1");
 
-    // $('#firework_img').css("position", "relative").css("bottom", "43em").css("border", "3px solid lightpink").css("border-radius", "1em").css("margin", "auto");
-
     rndm_num4 = Math.floor(Math.random() * 2);
     if (rndm_num4 === 1) {
         fw_sound_clip = "firework1"
@@ -355,6 +362,6 @@ function gameWon () {
     }
     $('#game_area h3').css("background-color", "white").css("border", "3px solid lightpink").css("border-radius", "1em").css("position", "relative").css("bottom", "0.8em").css("margin", "auto");
 
-    $('.bottom_stats').css("position", "relative").css("bottom", "4em");
+    $('.bottom_stats').css("position", "relative").css("bottom", "2.5em");
 
 }
