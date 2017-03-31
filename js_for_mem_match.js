@@ -4,7 +4,7 @@ var theme = "pokemo";
 var first_card_clicked = null;
 var second_card_clicked = null;
 
-var total_possible_matches = 2;         // win condition
+var total_possible_matches = 9;         // win condition
 var match_counter = 0;
 var attempts = 0;
 var accuracy = 0;
@@ -111,7 +111,7 @@ function generateRandomCardSlots () {
 
         for (var j=0; j < array_ordered.length; j++) {
             if (rndm_num1 === array_ordered[j]) {
-                array_ordered.splice(j,1);          // remove element from original array if rndm_num matches that element
+                array_ordered.splice(j,1);          // remove element from original array if rndm_num1 matches that element
                 array_randomized.push(rndm_num1);
             }
         }
@@ -126,8 +126,6 @@ function resetTwoCards () {
 
     first_card_clicked = null;
     second_card_clicked = null;
-
-    $('.bottom_stats').css("position", "relative").css("bottom", "6em");
 }
 
 /* Called by multiple functions.  Generates or affects text in "stats" area (left_side div). */
@@ -135,6 +133,10 @@ function displayStats () {
     $(".games_played .value").text(games_played);
     $(".matches .value").text(match_counter);
     $(".attempts .value").text(attempts);
+
+    if (attempts !== 0) {
+        accuracy = match_counter / attempts;
+    }
 
     var percent_accuracy = accuracy * 100;          // convert to a number betweeen 0 and 100
     percent_accuracy = percent_accuracy.toFixed(1); // round number to 1 decimal point
@@ -154,22 +156,22 @@ function liftDown () {
     var audio_forgetIt = document.getElementById("forgetIt");
     audio_forgetIt.play();
 
-    attempts++;
-    $(".back").toggleClass("make_opaque");
+    attempts += 2;
     displayStats();
-    // setTimeout(function() {$(".back").toggleClass("make_opaque")}, 5000);
+
+    $(".back").toggleClass("make_opaque");
 }
 
+/* Called by "Lift Cards" button.  Returns cards to 'covered'. */
 function liftUp () {
-    attempts++;
     $(".back").toggleClass("make_opaque");
-    displayStats();
 }
 
 /* Called by: "Reset button".  Removes vestiges of old game and sets up for new game. */
 function resetClicked () {
     var audio_card_shuffle = document.getElementById("cardShuffle");
     audio_card_shuffle.play();
+
     games_played++;
     resetStats();
 
@@ -178,13 +180,18 @@ function resetClicked () {
 
     $(".card_front").remove();              // remove the old card front elements
     insertFrontCards();
-    $(".back").removeClass("make_opaque").removeClass("little_opaque").removeClass("matched");  // card backs are put back in place by making them visible again
+
+    // card backs are put back in place by making them visible again
+    $(".back").removeClass("make_opaque").removeClass("little_opaque").removeClass("matched");
 }
 
 /* Called by: "cardClicked".  Plays sound clip and flips over the 1 card that was clicked on. */
 function flipCard (card_back) {
     var audio_card_flip_1 = document.getElementById("cardFlip1");
     audio_card_flip_1.play();
+
+    $('#game_area h3').remove();
+    $('.bottom_stats').css("position", "relative").css("bottom", "6em");
 
     $(card_back).toggleClass("make_opaque");
 }
@@ -206,7 +213,7 @@ function cardAlreadyFlipped () {
     $('#game_area').append("<h3>Choose an unflipped card </h3>");
     $('#game_area h3').css("color", phrase_color).css("background-color", "white").css("border", "3px solid lightpink").css("border-radius", "1em").css("position", "relative").css("bottom", "0.8em").css("width", "70%").css("margin", "auto");
 
-    $('.bottom_stats').css("position", "relative").css("bottom", "2.5em");
+    $('.bottom_stats').css("position", "relative").css("bottom", "2.5em");  // make room for h3 in mobile view (worst case)
 }
 
 /* If 1st card clicked, then simply shows card front.  If 2nd card clicked, then checks to see if there is a match with the 1st card. */
@@ -222,8 +229,6 @@ function cardClicked () {
         if (first_card_clicked === null) {
             first_card_clicked = this;
             flipCard(this);
-            $('#game_area h3').remove();
-            $('.bottom_stats').css("position", "relative").css("bottom", "6em");
         }
         else if (second_card_clicked === null) {
             second_card_clicked = this;
@@ -232,12 +237,9 @@ function cardClicked () {
                 second_card_clicked = null;
 
             } else {
-                $('#game_area h3').remove();
-                $('.bottom_stats').css("position", "relative").css("bottom", "6em");
                 flipCard(this);
 
                 attempts++;
-                accuracy = match_counter / attempts;
                 displayStats();
 
                 first_img = $(first_card_clicked).parent().children(".front").find("img").attr('src');
@@ -251,7 +253,6 @@ function cardClicked () {
                     $(second_card_clicked).addClass("matched").addClass("little_opaque");
 
                     match_counter++;
-                    accuracy = match_counter / attempts;
                     displayStats();
 
                     first_card_clicked = null;
@@ -265,7 +266,9 @@ function cardClicked () {
                     setTimeout(function() {
                         var audio_card_flip_2 = document.getElementById("cardFlip2");
                         audio_card_flip_2.play();
-                    }, 1000);   // a delay of 1 second is needed to sync the audio clip with the resetting of the 2 cards
+                    }, 1000);
+                    // a delay of 1 second is needed to sync the audio clip with the resetting of the 2 cards
+
                     setTimeout(resetTwoCards, 1500);
                 }
             }
@@ -362,6 +365,5 @@ function gameWon () {
     }
     $('#game_area h3').css("background-color", "white").css("border", "3px solid lightpink").css("border-radius", "1em").css("position", "relative").css("bottom", "0.8em").css("margin", "auto");
 
-    $('.bottom_stats').css("position", "relative").css("bottom", "2.5em");
-
+    $('.bottom_stats').css("position", "relative").css("bottom", "2.5em");  // make room for winning phrase in mobile view (worst case)
 }

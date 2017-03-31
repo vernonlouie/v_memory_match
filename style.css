@@ -53,7 +53,7 @@ header {
 
     .change_theme {
         background-color:   deepskyblue;
-        border: 3px pink solid;
+        border:             3px pink solid;
     }
 
 /* Bottom container and its elements */
@@ -62,7 +62,7 @@ header {
     /*width:          90vw;*/
     text-align:     center;
     border-radius:  3em;
-    border:         1px blue dotted;
+    /*border:         1px blue dotted;*/
     /*margin:         auto;*/
     margin-right:   1em;
 }
@@ -91,25 +91,9 @@ header {
         padding-bottom:     3.5em;
     }
 
-    .label {
-
-    }
-
-    .games-played {
-
-    }
-
-    .attempts {
-
-    }
-
-    .accuracy {
-
-    }
-
     .reset {
         background-color:   peachpuff;
-        border: 4px pink solid;
+        border:             4px pink solid;
     }
 
     .left_side .lift {
@@ -117,8 +101,8 @@ header {
     }
 
     .lift {
-    background-color:   mediumpurple;
-    border: 4px pink solid;
+        background-color:   mediumpurple;
+        border:             4px pink solid;
     }
 
 /* game area and its elements within bottom container */
@@ -127,7 +111,7 @@ header {
     width:          79%;
     text-align:     center;
     border-radius:  0.5em;
-    border:         1px blue solid;
+    /*border:         1px blue solid;*/
     font-family:    "kinkie", Verdana, Arial;
     color:          purple;
     margin:         auto;
@@ -184,7 +168,7 @@ header {
 }
 
 .bottom_stats .first_top {
-    width:  23%;
+    width:      23%;
     display:    inline-block;
 }
 
