@@ -4,7 +4,7 @@ var theme = "pokemo";
 var first_card_clicked = null;
 var second_card_clicked = null;
 
-var total_possible_matches = 2;         // win condition
+var total_possible_matches = 1;         // win condition
 var match_counter = 0;
 var attempts = 0;
 var accuracy = 0;
@@ -122,8 +122,11 @@ function generateRandomCardSlots () {
 function resetTwoCards () {
     $(first_card_clicked).toggleClass("make_opaque");
     $(second_card_clicked).toggleClass("make_opaque");
+
     first_card_clicked = null;
     second_card_clicked = null;
+
+    $('.bottom_stats').css("position", "relative").css("bottom", "6em");
 }
 
 /* Called by multiple functions.  Generates or affects text in "stats" area (left_side div). */
@@ -162,6 +165,8 @@ function resetClicked () {
     resetStats();
 
     $('#game_area h3').remove();            // remove h3 element with winning phrase
+    $('.bottom_stats').css("position", "relative").css("bottom", "6em");
+
     $(".card_front").remove();              // remove the old card front elements
     insertFrontCards();
     $(".back").removeClass("make_opaque").removeClass("little_opaque").removeClass("matched");  // card backs are put back in place by making them visible again
@@ -169,8 +174,8 @@ function resetClicked () {
 
 /* Called by: "cardClicked".  Plays sound clip and flips over the 1 card that was clicked on. */
 function flipCard (card_back) {
-    var audio_card_flip = document.getElementById("cardFlip");
-    audio_card_flip.play();
+    var audio_card_flip_1 = document.getElementById("cardFlip1");
+    audio_card_flip_1.play();
 
     $(card_back).toggleClass("make_opaque");
 }
@@ -192,7 +197,7 @@ function cardAlreadyFlipped () {
     $('#game_area').append("<h3>Choose an unflipped card </h3>");
     $('#game_area h3').css("color", phrase_color).css("background-color", "white").css("border", "3px solid lightpink").css("border-radius", "1em").css("position", "relative").css("bottom", "0.8em").css("width", "70%").css("margin", "auto");
 
-    // $('.bottom_stats').css("position", "relative").css("top", "2.5em");
+    $('.bottom_stats').css("position", "relative").css("bottom", "4em");
 }
 
 /* If 1st card clicked, then simply shows card front.  If 2nd card clicked, then checks to see if there is a match with the 1st card. */
@@ -209,6 +214,7 @@ function cardClicked () {
             first_card_clicked = this;
             flipCard(this);
             $('#game_area h3').remove();
+            $('.bottom_stats').css("position", "relative").css("bottom", "6em");
         }
         else if (second_card_clicked === null) {
             second_card_clicked = this;
@@ -218,6 +224,7 @@ function cardClicked () {
 
             } else {
                 $('#game_area h3').remove();
+                $('.bottom_stats').css("position", "relative").css("bottom", "6em");
                 flipCard(this);
 
                 attempts++;
@@ -246,6 +253,10 @@ function cardClicked () {
                     }
                 }
                 else {
+                    setTimeout(function() {
+                        var audio_card_flip_2 = document.getElementById("cardFlip2");
+                        audio_card_flip_2.play();
+                    }, 1000);   // a delay of 1 second is needed to sync the audio clip with the resetting of the 2 cards
                     setTimeout(resetTwoCards, 1500);
                 }
             }
@@ -304,9 +315,11 @@ function gameWon () {
             id:     "firework_img"
         });
 
-    $("#game_area").append(fireworks_gif);
+    $("#game_area").prepend(fireworks_gif);
 
-    $('#firework_img').css("position", "relative").css("bottom", "43em").css("border", "3px solid lightpink").css("border-radius", "1em").css("margin", "auto");
+    $('#firework_img').css("position", "absolute").css("right", "20%").css("border", "3px solid lightpink").css("border-radius", "1em").css("width","50%").css("height", "50%").css("z-index", "1");
+
+    // $('#firework_img').css("position", "relative").css("bottom", "43em").css("border", "3px solid lightpink").css("border-radius", "1em").css("margin", "auto");
 
     rndm_num4 = Math.floor(Math.random() * 2);
     if (rndm_num4 === 1) {
@@ -341,5 +354,7 @@ function gameWon () {
         $('#game_area h3').css("font-family", "kinkie").css("color", "rebeccapurple");
     }
     $('#game_area h3').css("background-color", "white").css("border", "3px solid lightpink").css("border-radius", "1em").css("position", "relative").css("bottom", "0.8em").css("margin", "auto");
+
+    $('.bottom_stats').css("position", "relative").css("bottom", "4em");
 
 }
