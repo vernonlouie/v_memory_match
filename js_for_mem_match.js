@@ -21,8 +21,7 @@ $(document).ready(function () {
         $('#image_background').css("background-image", "url(images/background_pony.jpg)" );
     }
 
-    $(".lift").mousedown(liftDown);     // "Lift Cards" button
-    $(".lift").mouseup(liftUp);
+    $(".lift").hover(liftDown, liftUp); // "Lift Cards" button
     $(".back").click(cardClicked);     // card back
     $(".reset").click(resetClicked);   // "Reset Game" button
 });
@@ -151,7 +150,7 @@ function resetStats () {
     displayStats();
 }
 
-/* Called by "Lift Cards" button.  "Lifts" card backs so users can see card fronts. */
+/* Called by hovering "Lift Cards" button.  "Lifts" card backs so users can see card fronts. */
 function liftDown () {
     var audio_forgetIt = document.getElementById("forgetIt");
     audio_forgetIt.play();
@@ -162,7 +161,7 @@ function liftDown () {
     $(".back").toggleClass("make_opaque");
 }
 
-/* Called by "Lift Cards" button.  Returns cards to 'covered'. */
+/* Called by exiting a hover of "Lift Cards" button.  Returns cards to 'covered'. */
 function liftUp () {
     $(".back").toggleClass("make_opaque");
 }
@@ -249,8 +248,8 @@ function cardClicked () {
                     audio_yeah = document.getElementById("yeah");
                     audio_yeah.play();
 
-                    $(first_card_clicked).addClass("matched").addClass("little_opaque");
-                    $(second_card_clicked).addClass("matched").addClass("little_opaque");
+                    $(first_card_clicked).addClass("matched").addClass("little_opaque").removeClass("make_opaque");
+                    $(second_card_clicked).addClass("matched").addClass("little_opaque").removeClass("make_opaque");
 
                     match_counter++;
                     displayStats();
