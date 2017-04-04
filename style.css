@@ -1,4 +1,4 @@
-/* Vernon Louie     March 2017 */
+/* Vernon Louie     April 2017 */
 
 body {
     font-family:                Verdana, Arial;
@@ -39,7 +39,7 @@ header {
 
     .title {
         height:     4em;
-        width:      50%;
+        width:      90%;
         display:    inline-block;
         margin:     0 0 0.5em 0;
     }
@@ -158,18 +158,20 @@ header {
         border: 4px purple solid;
     }
 
+/****************** Responsiveness *******************/
 .bottom_stats {
     margin:     auto;
     /*border:     2px dotted black;*/
     width:      85%;
     text-align: center;
     position:   relative;
-    bottom:     6em;
+    bottom:     3em;
 }
 
 .bottom_stats .first_top {
-    width:      23%;
+    width:      22%;
     display:    inline-block;
+    font-size:  0.8em;
 }
 
 .bottom_buttons {
@@ -180,3 +182,52 @@ header {
     margin-left:   1em;
 }
 
+/************************** Media Queries ******************************/
+/* For mobile landscape */
+@media only screen and (orientation: landscape) {
+    .lift {
+        display:    none;
+    }
+
+    h3 {
+        font-size:  14px;
+    }
+
+    .bottom_stats {
+        bottom:     3em;
+    }
+}
+
+/* For non-mobile to prevent from invoking mobile landscape */
+@media only screen and (min-width: 732px) {
+    .lift {
+        display:    inline-block;
+    }
+
+    h3 {
+        font-size:  18px;
+    }
+
+    .card_row {
+        height:     32%;
+    }
+}
+
+/* For mobile portrait */
+@media only screen and (max-width: 479px) {
+    .lift {
+        display:    none;
+    }
+
+    h3 {
+        font-size:  14px;
+    }
+
+    .bottom_stats {
+        bottom:     3em;
+    }
+
+    .card_row {
+        height:     31.5%;
+    }
+}

@@ -1,10 +1,10 @@
-/*  Vernon Louie     March 2017     */
+/*  Vernon Louie     April 2017     */
 
 var theme = "pokemo";
 var first_card_clicked = null;
 var second_card_clicked = null;
 
-var total_possible_matches = 9;         // win condition
+var total_possible_matches = 2;         // win condition
 var match_counter = 0;
 var attempts = 0;
 var accuracy = 0;
@@ -21,7 +21,9 @@ $(document).ready(function () {
         $('#image_background').css("background-image", "url(images/background_pony.jpg)" );
     }
 
-    $(".lift").hover(liftDown, liftUp); // "Lift Cards" button
+    $(".lift").mousedown(uncoverCards);     // "Lift Cards" button
+    $(".lift").mouseleave(coverCards);
+    // $(".lift").hover(liftDown, liftUp); // "Lift Cards" button
     $(".back").click(cardClicked);     // card back
     $(".reset").click(resetClicked);   // "Reset Game" button
 });
@@ -150,20 +152,23 @@ function resetStats () {
     displayStats();
 }
 
-/* Called by hovering "Lift Cards" button.  "Lifts" card backs so users can see card fronts. */
-function liftDown () {
+/* Called by mousedown on "Lift Cards" button.  "Lifts" card backs so users can see card fronts. */
+function uncoverCards () {
     var audio_forgetIt = document.getElementById("forgetIt");
     audio_forgetIt.play();
 
-    attempts += 2;
-    displayStats();
-
-    $(".back").toggleClass("make_opaque");
+    if (!($(".back").hasClass("make_opaque"))) {
+        $(".back").toggleClass("make_opaque");
+        attempts += 2;
+        displayStats();
+    }
 }
 
-/* Called by exiting a hover of "Lift Cards" button.  Returns cards to 'covered'. */
-function liftUp () {
-    $(".back").toggleClass("make_opaque");
+/* Called when mouse exits "Lift Cards" button.  Returns cards to 'covered'. */
+function coverCards () {
+    if (($(".back").hasClass("make_opaque"))) {
+        $(".back").toggleClass("make_opaque");
+    }
 }
 
 /* Called by: "Reset button".  Removes vestiges of old game and sets up for new game. */
@@ -175,7 +180,7 @@ function resetClicked () {
     resetStats();
 
     $('#game_area h3').remove();            // remove h3 element with winning phrase
-    $('.bottom_stats').css("position", "relative").css("bottom", "6em");
+    $('.bottom_stats').css("position", "relative").css("bottom", "3em");
 
     $(".card_front").remove();              // remove the old card front elements
     insertFrontCards();
@@ -190,7 +195,7 @@ function flipCard (card_back) {
     audio_card_flip_1.play();
 
     $('#game_area h3').remove();
-    $('.bottom_stats').css("position", "relative").css("bottom", "6em");
+    $('.bottom_stats').css("position", "relative").css("bottom", "3em");
 
     $(card_back).toggleClass("make_opaque");
 }
@@ -212,7 +217,7 @@ function cardAlreadyFlipped () {
     $('#game_area').append("<h3>Choose an unflipped card </h3>");
     $('#game_area h3').css("color", phrase_color).css("background-color", "white").css("border", "3px solid lightpink").css("border-radius", "1em").css("position", "relative").css("bottom", "0.8em").css("width", "70%").css("margin", "auto");
 
-    $('.bottom_stats').css("position", "relative").css("bottom", "2.5em");  // make room for h3 in mobile view (worst case)
+    $('.bottom_stats').css("position", "relative").css("bottom", "2em");  // make room for h3 in mobile view (worst case)
 }
 
 /* If 1st card clicked, then simply shows card front.  If 2nd card clicked, then checks to see if there is a match with the 1st card. */
@@ -228,6 +233,7 @@ function cardClicked () {
         if (first_card_clicked === null) {
             first_card_clicked = this;
             flipCard(this);
+            $(".lift").hide();      // hide the "Lift Cards" button, so it can't be moused over after the 1st card is picked
         }
         else if (second_card_clicked === null) {
             second_card_clicked = this;
@@ -270,6 +276,11 @@ function cardClicked () {
 
                     setTimeout(resetTwoCards, 1500);
                 }
+
+                if (document.documentElement.clientWidth > 732) {   // for non-mobile
+                    $(".lift").show();
+                }
+
             }
         }
         else {
@@ -364,5 +375,5 @@ function gameWon () {
     }
     $('#game_area h3').css("background-color", "white").css("border", "3px solid lightpink").css("border-radius", "1em").css("position", "relative").css("bottom", "0.8em").css("margin", "auto");
 
-    $('.bottom_stats').css("position", "relative").css("bottom", "2.5em");  // make room for winning phrase in mobile view (worst case)
+    $('.bottom_stats').css("position", "relative").css("bottom", "2em");  // make room for winning phrase in mobile view (worst case)
 }
