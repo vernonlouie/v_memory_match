@@ -4,7 +4,7 @@ var theme = "pokemo";
 var first_card_clicked = null;
 var second_card_clicked = null;
 
-var total_possible_matches = 2;         // win condition
+var total_possible_matches = 9;         // win condition
 var match_counter = 0;
 var attempts = 0;
 var accuracy = 0;
@@ -233,7 +233,7 @@ function cardClicked () {
         if (first_card_clicked === null) {
             first_card_clicked = this;
             flipCard(this);
-            $(".lift").hide();      // hide the "Lift Cards" button, so it can't be moused over after the 1st card is picked
+            $(".lift").css("visibility", "hidden");      // hide the "Lift Cards" button, so it can't be moused over after the 1st card is picked
         }
         else if (second_card_clicked === null) {
             second_card_clicked = this;
@@ -278,7 +278,7 @@ function cardClicked () {
                 }
 
                 if (document.documentElement.clientWidth > 732) {   // for non-mobile
-                    $(".lift").show();
+                    $(".lift").css("visibility", "visible");
                 }
 
             }
