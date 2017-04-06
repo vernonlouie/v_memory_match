@@ -1,10 +1,10 @@
-/*  Vernon Louie     March 2017     */
+/*  Vernon Louie     April 2017     */
 
 var theme = "pokemo";
 var first_card_clicked = null;
 var second_card_clicked = null;
 
-var total_possible_matches = 2;         // win condition
+var total_possible_matches = 9;         // win condition
 var match_counter = 0;
 var attempts = 0;
 var accuracy = 0;
@@ -16,15 +16,16 @@ $(document).ready(function () {
     insertBackCards();
 
     if (theme === "pokemon") {
-        $('body').css("background", "url(images/background_pkmn.jpg) no-repeat center center fixed");
+        $('#image_background').css("background-image", "url(images/background_pkmn.jpg)" );
     } else {
-        $('body').css("background", "url(images/background_pony.jpg) no-repeat center center fixed");
+        $('#image_background').css("background-image", "url(images/background_pony.jpg)" );
     }
 
-    $(".lift").click(liftClicked);     // "Lift Cards" button
+    $(".lift").mousedown(uncoverCards);     // "Lift Cards" button
+    $(".lift").mouseleave(coverCards);
+    // $(".lift").hover(liftDown, liftUp); // "Lift Cards" button
     $(".back").click(cardClicked);     // card back
     $(".reset").click(resetClicked);   // "Reset Game" button
-
 });
 
 function insertTitle () {
@@ -111,7 +112,7 @@ function generateRandomCardSlots () {
 
         for (var j=0; j < array_ordered.length; j++) {
             if (rndm_num1 === array_ordered[j]) {
-                array_ordered.splice(j,1);          // remove element from original array if rndm_num matches that element
+                array_ordered.splice(j,1);          // remove element from original array if rndm_num1 matches that element
                 array_randomized.push(rndm_num1);
             }
         }
@@ -123,6 +124,7 @@ function generateRandomCardSlots () {
 function resetTwoCards () {
     $(first_card_clicked).toggleClass("make_opaque");
     $(second_card_clicked).toggleClass("make_opaque");
+
     first_card_clicked = null;
     second_card_clicked = null;
 }
@@ -132,6 +134,10 @@ function displayStats () {
     $(".games_played .value").text(games_played);
     $(".matches .value").text(match_counter);
     $(".attempts .value").text(attempts);
+
+    if (attempts !== 0) {
+        accuracy = match_counter / attempts;
+    }
 
     var percent_accuracy = accuracy * 100;          // convert to a number betweeen 0 and 100
     percent_accuracy = percent_accuracy.toFixed(1); // round number to 1 decimal point
@@ -146,32 +152,50 @@ function resetStats () {
     displayStats();
 }
 
-/* Called by "Lift Cards" button.  "Lifts" card backs for 1/2 second so users can see card fronts momentarily. */
-function liftClicked () {
-    var audio_oh_no = document.getElementById("ohNo");
-    audio_oh_no.play();
+/* Called by mousedown on "Lift Cards" button.  "Lifts" card backs so users can see card fronts. */
+function uncoverCards () {
+    var audio_forgetIt = document.getElementById("forgetIt");
+    audio_forgetIt.play();
 
-    $(".back").toggleClass("make_opaque");
-    setTimeout(function() {$(".back").toggleClass("make_opaque")}, 500);
+    if (!($(".back").hasClass("make_opaque"))) {
+        $(".back").toggleClass("make_opaque");
+        attempts += 2;
+        displayStats();
+    }
+}
+
+/* Called when mouse exits "Lift Cards" button.  Returns cards to 'covered'. */
+function coverCards () {
+    if (($(".back").hasClass("make_opaque"))) {
+        $(".back").toggleClass("make_opaque");
+    }
 }
 
 /* Called by: "Reset button".  Removes vestiges of old game and sets up for new game. */
 function resetClicked () {
-    var audioCardShuffle = document.getElementById("cardShuffle");
-    audioCardShuffle.play();
+    var audio_card_shuffle = document.getElementById("cardShuffle");
+    audio_card_shuffle.play();
+
+    games_played++;
     resetStats();
 
     $('#game_area h3').remove();            // remove h3 element with winning phrase
+    $('.bottom_stats').css("position", "relative").css("bottom", "3em");
+
     $(".card_front").remove();              // remove the old card front elements
     insertFrontCards();
-    $(".back").removeClass("make_opaque").removeClass("little_opaque").removeClass("matched");  // card backs are put back in place by making them visible again
-    $(".reset").click(resetClicked);       // Call function resetClicked when clicking on the reset button
+
+    // card backs are put back in place by making them visible again
+    $(".back").removeClass("make_opaque").removeClass("little_opaque").removeClass("matched");
 }
 
 /* Called by: "cardClicked".  Plays sound clip and flips over the 1 card that was clicked on. */
 function flipCard (card_back) {
-    var audio_card_flip = document.getElementById("cardFlip");
-    audio_card_flip.play();
+    var audio_card_flip_1 = document.getElementById("cardFlip1");
+    audio_card_flip_1.play();
+
+    $('#game_area h3').remove();
+    $('.bottom_stats').css("position", "relative").css("bottom", "3em");
 
     $(card_back).toggleClass("make_opaque");
 }
@@ -182,26 +206,103 @@ function cardAlreadyFlipped () {
     var phrase_color;
     var colorArray = ["purple", "deeppink", "blue", "darkblue", "magenta", "hotpink", "darkmagenta", "green", "darkgreen"];
 
+    var audio_card_already_picked = document.getElementById("error");
+    audio_card_already_picked.play();
+
     $('#game_area h3').remove();
 
     rndm_num2 = Math.floor(Math.random() * 9);
     phrase_color = colorArray[rndm_num2];
 
     $('#game_area').append("<h3>Choose an unflipped card </h3>");
-    $('#game_area h3').css("color", phrase_color).css("background-color", "white").css("border", "3px solid lightpink").css("border-radius", "1em");
+    $('#game_area h3').css("color", phrase_color).css("background-color", "white").css("border", "3px solid lightpink").css("border-radius", "1em").css("position", "relative").css("bottom", "0.8em").css("width", "70%").css("margin", "auto");
+
+    $('.bottom_stats').css("position", "relative").css("bottom", "2em");  // make room for h3 in mobile view (worst case)
 }
 
 /* If 1st card clicked, then simply shows card front.  If 2nd card clicked, then checks to see if there is a match with the 1st card. */
 function cardClicked () {
     var audio_yeah;
-    var audio_success;
-
     var first_img;
     var second_img;
 
+    if ($(this).hasClass("matched")) {
+        cardAlreadyFlipped();
+
+    } else {
+        if (first_card_clicked === null) {
+            first_card_clicked = this;
+            flipCard(this);
+            $(".lift").css("visibility", "hidden");      // hide the "Lift Cards" button, so it can't be moused over after the 1st card is picked
+        }
+        else if (second_card_clicked === null) {
+            second_card_clicked = this;
+            if (first_card_clicked === second_card_clicked) {
+                cardAlreadyFlipped();
+                second_card_clicked = null;
+
+            } else {
+                flipCard(this);
+
+                attempts++;
+                displayStats();
+
+                first_img = $(first_card_clicked).parent().children(".front").find("img").attr('src');
+                second_img = $(second_card_clicked).parent().children(".front").find("img").attr('src');
+
+                if (first_img === second_img) {                     // if legitimate match
+                    audio_yeah = document.getElementById("yeah");
+                    audio_yeah.play();
+
+                    $(first_card_clicked).addClass("matched").addClass("little_opaque").removeClass("make_opaque");
+                    $(second_card_clicked).addClass("matched").addClass("little_opaque").removeClass("make_opaque");
+
+                    match_counter++;
+                    displayStats();
+
+                    first_card_clicked = null;
+                    second_card_clicked = null;
+
+                    if (match_counter === total_possible_matches) {
+                        gameWon();
+                    }
+                }
+                else {
+                    setTimeout(function() {
+                        var audio_card_flip_2 = document.getElementById("cardFlip2");
+                        audio_card_flip_2.play();
+                    }, 1000);
+                    // a delay of 1 second is needed to sync the audio clip with the resetting of the 2 cards
+
+                    setTimeout(resetTwoCards, 1500);
+                }
+
+                if (document.documentElement.clientWidth > 732) {   // for non-mobile
+                    $(".lift").css("visibility", "visible");
+                }
+
+            }
+        }
+        else {
+            // This handles the case where you click on more than 2 cards; i.e., doesn't do anything
+        }
+    }
+}
+
+function gameWon () {
     var rndm_num3;
+    var rndm_num4;
+    var rndm_num5;
+
+    var fireworks_gif;
+    var fw_gif;
+    var fw_sound_clip;
+
     var phrase;
     var phrase_element;
+
+    var audio_firework;
+
     var winning_phrases_array_pokemon =
         [
             "You have won!  Word to the mother!",
@@ -219,80 +320,60 @@ function cardClicked () {
             "Well played...Twilight Sparkle can fly again!"
         ];
 
-    if ($(this).hasClass("matched")) {
-        cardAlreadyFlipped();
+    $(".back").removeClass("little_opaque").addClass("make_opaque");    // reveal all card fronts
 
+    rndm_num3 = Math.floor(Math.random() * 2);
+    if (rndm_num3 === 1) {
+        fw_gif = "images/fireworks-animated-gif-40-2.gif"
     } else {
-        if (first_card_clicked === null) {
-            first_card_clicked = this;
-            flipCard(this);
-            $('#game_area h3').remove();
-        }
-        else if (second_card_clicked === null) {
-            second_card_clicked = this;
-            if (first_card_clicked === second_card_clicked) {
-                cardAlreadyFlipped();
-                second_card_clicked = null;
-
-            } else {
-                $('#game_area h3').remove();
-                flipCard(this);
-
-                attempts++;
-                accuracy = match_counter / attempts;
-                displayStats();
-
-                first_img = $(first_card_clicked).parent().children(".front").find("img").attr('src');
-                second_img = $(second_card_clicked).parent().children(".front").find("img").attr('src');
-
-                if (first_img === second_img) {                     // if legitimate match
-                    audio_yeah = document.getElementById("yeah");
-                    audio_yeah.play();
-
-                    $(first_card_clicked).addClass("matched").addClass("little_opaque");
-                    $(second_card_clicked).addClass("matched").addClass("little_opaque");
-
-                    match_counter++;
-                    accuracy = match_counter / attempts;
-                    displayStats();
-
-                    first_card_clicked = null;
-                    second_card_clicked = null;
-
-                    if (match_counter === total_possible_matches) {
-                        audio_success = document.getElementById("success");
-                        audio_success.play();
-
-                        rndm_num3 = Math.floor(Math.random() * 5);
-                        if (theme === "pokemon") {
-                            phrase = winning_phrases_array_pokemon[rndm_num3];
-                        } else {
-                            phrase = winning_phrases_array_pony[rndm_num3];
-                        }
-
-                        phrase_element = $("<h3>",
-                            {
-                                text:   phrase
-                            });
-                        $('#game_area').append(phrase_element);
-                        // $('#game_area h3').css("color", "purple");
-
-                        if (theme === "pokemon") {
-                            $('#game_area h3').css("font-family", "pokeFont").css("color", "yellow");
-                        } else {
-                            $('#game_area h3').css("font-family", "kinkie").css("color", "rebeccapurple");
-                        }
-                        $('#game_area h3').css("background-color", "white").css("border", "3px solid lightpink").css("border-radius", "1em");
-                        games_played++;
-                    }
-                }
-                else {
-                    setTimeout(resetTwoCards, 1500);
-                }
-            }
-        }
-        else {  // This handles the case where you click on more than 2 cards; i.e., doesn't do anything
-            // console.log("2 cards have already been clicked");
-        }
+        fw_gif = "images/fireworks-animated-gif-21-2.gif"
     }
+
+    fireworks_gif = $("<img>",
+        {
+            src:    fw_gif,
+            alt:    "fireworks gif",
+            class:  "w3-animate-zoom",
+            id:     "firework_img"
+        });
+
+    $("#game_area").prepend(fireworks_gif);
+
+    $('#firework_img').css("position", "absolute").css("right", "20%").css("border", "3px solid lightpink").css("border-radius", "1em").css("width","50%").css("height", "50%").css("z-index", "1");
+
+    rndm_num4 = Math.floor(Math.random() * 2);
+    if (rndm_num4 === 1) {
+        fw_sound_clip = "firework1"
+    } else {
+        fw_sound_clip = "firework2"
+    }
+
+    audio_firework = document.getElementById(fw_sound_clip);
+    audio_firework.play();
+
+    setTimeout(function() {
+        $("#firework_img").remove();
+    }, 5000);
+
+    rndm_num5 = Math.floor(Math.random() * 5);
+    if (theme === "pokemon") {
+        phrase = winning_phrases_array_pokemon[rndm_num5];
+    } else {
+        phrase = winning_phrases_array_pony[rndm_num5];
+    }
+
+    phrase_element = $("<h3>",
+        {
+            text:   phrase
+        });
+    $('#game_area').append(phrase_element);
+
+    if (theme === "pokemon") {
+        $('#game_area h3').css("font-family", "pokeFont").css("color", "darkorange");
+    } else {
+        $('#game_area h3').css("font-family", "kinkie").css("color", "rebeccapurple");
+    }
+    $('#game_area h3').css("background-color", "white").css("border", "3px solid lightpink").css("border-radius", "1em").css("position", "relative").css("bottom", "0.8em").css("margin", "auto");
+
+    $('.bottom_stats').css("position", "relative").css("bottom", "2em");  // make room for winning phrase in mobile view (worst case)
 }
