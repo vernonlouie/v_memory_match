@@ -1,6 +1,6 @@
 /*  Vernon Louie     April 2017     */
 
-var theme = "pokemo";
+var theme = "pokemo";                   // "pokemon" if you want Pokemon theme
 var first_card_clicked = null;
 var second_card_clicked = null;
 

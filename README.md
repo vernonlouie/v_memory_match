@@ -29,6 +29,7 @@ e) User can click on various cards and not disrupt play
 4) database to record game scores
 5) 2-player option
 6) 24 or 30-card option
+7) Fix known problem on mobile/IPAD where there is no mouseleave detection on the Lift Cards button.
 
 ## What I Learned
 - how to implement a downloadable font.
