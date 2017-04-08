@@ -234,4 +234,8 @@ header {
     .bottom_stats .first_top {
         font-size:  0.9em;
     }
+
+    #game_area {
+        width:  95%;
+    }
 }
