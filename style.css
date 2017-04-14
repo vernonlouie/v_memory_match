@@ -184,22 +184,22 @@ header {
 
 /************************** Media Queries ******************************/
 /* For mobile landscape */
-@media only screen and (orientation: landscape) {
-    .lift {
-        display:    none;
-    }
+/*@media only screen and (orientation: landscape) {*/
+    /*.lift {*/
+        /*display:    none;*/
+    /*}*/
 
-    h3 {
-        font-size:  14px;
-    }
+    /*h3 {*/
+        /*font-size:  14px;*/
+    /*}*/
 
-    .bottom_stats {
-        bottom:     3em;
-    }
-}
+    /*.bottom_stats {*/
+        /*bottom:     3em;*/
+    /*}*/
+/*}*/
 
 /* For non-mobile to prevent from invoking mobile landscape */
-@media only screen and (min-width: 732px) {
+@media only screen and (min-width: 768px) {
     .lift {
         display:    inline-block;
     }
@@ -214,7 +214,7 @@ header {
 }
 
 /* For mobile portrait */
-@media only screen and (max-width: 479px) {
+@media only screen and (max-width: 768px) {
     .lift {
         display:    none;
     }
