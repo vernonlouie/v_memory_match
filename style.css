@@ -1,5 +1,7 @@
 /* Vernon Louie     April 2017 */
 
+
+
 body {
     font-family:                Verdana, Arial;
 }
@@ -42,6 +44,7 @@ header {
         width:      90%;
         display:    inline-block;
         margin:     0 0 0.5em 0;
+        text-shadow:    -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
     }
 
     .settings {
